@@ -51,7 +51,8 @@ class NomSerieRepository extends EntityRepository
 	    }
 	}
 	public function SearchSerie($keyWord)
-    {
+    {	
+    	$keyWord = str_replace(' ', '%', trim($keyWord));
  
 		$qb = $this->createQueryBuilder('u')  //add select and array for JSON
             ->where('u.nomSerie LIKE :string OR u.auteur LIKE :string')
