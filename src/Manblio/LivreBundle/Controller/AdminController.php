@@ -69,33 +69,6 @@ class AdminController extends Controller{
         return $this->render("ManblioLivreBundle:Form:ajouterSerie.html.twig", array(
         		'form' => $form->createView(),
         	));
-    	
-/*
-
-    	// on cree un objet nomserie et un formulaire
-    	$em = $this->getDoctrine()->getManager();	
-		$b = new NomSerie();
-		$form = $this->createForm(new NomSerieType(), $b);		
-		
-		//on recupere la requete
-		$request= $this->getRequest();
-
-		// si le formulaire a ete soumis on envoie les donnee dans la base
-		if($request->isMethod("POST")){
-			$form->bind($request);
-			$b=$form->getData();
-			$b->upload();
-			$em->persist($b);
-			$em->flush();
-
-			// on redirige vers la page d'administration
-			return $this->redirect($this->generateUrl("gestionBibliotheque"));
-		}
-
-		// on affiche la vue avec le formulaire
-		return $this->render("ManblioLivreBundle:Form:ajouterSerie.html.twig", array(
-				'form' => $form->createView(),
-			));*/
 	}
 
 	public function ajouterLivreAction(){
