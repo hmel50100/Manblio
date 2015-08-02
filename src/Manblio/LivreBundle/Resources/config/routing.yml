@@ -1,0 +1,11 @@
+touteSerie:
+    path:     /allSerie/{page}
+    defaults: { _controller: ManblioLivreBundle:Default:afficheSerie, page: 1 }
+
+detailSerie:
+    path:     /serie/{id}
+    defaults: { _controller: ManblioLivreBundle:Default:detailSerie }
+
+ManblioShowCollection:
+    path:     /showCollection/{id}
+    defaults: { _controller: ManblioLivreBundle:Default:afficheCollection }

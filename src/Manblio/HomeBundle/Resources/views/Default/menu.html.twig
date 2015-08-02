@@ -1,0 +1,48 @@
+<div id='cssmenu'>
+   <ul>
+      <li><a href='{{ path('manblio_home_homepage')}}'>Accueil</a></li>
+      <li class='has-sub'><a href='#'>Series</a>
+         <ul>
+            <li><a href='{{ path('touteSerie')}}'>Afficher les séries</a></li>
+            {% if is_granted('ROLE_LECTEUR') %}
+               <li class="has-sub"><a href=''> Administration </a>
+                  <ul>
+                     <li><a href='{{ path('ajouterNomSerie')}}'>Ajouter une serie</a></li>
+                     <li><a href='{{ path('ajouterLivre')}}'>Ajouter un tome</a></li>
+                     <li><a href='{{ path('AjouterSerie')}}'>Ajouter plusieurs tomes</a></li>
+                     <li><a href='{{ path('gestionBibliotheque')}}'>Gestion de la bibliothèque</a></li>
+                  </ul>
+               </li>
+            {% endif %}
+         </ul>
+      </li>
+      {% if is_granted('ROLE_USER') %}
+      <li class='has-sub'><a href='#'>Ma collection</a>
+         <ul>
+            <li><a href='{{ path('maCollection')}}'>Ma collection</a></li>
+            <li><a href='{{ path('dernierAjouts')}}'>Dernier tome ajouter</a></li>
+         </ul>
+      </li>
+      {% endif %}
+      {% if is_granted('ROLE_USER') %}
+         <li class='has-sub'><a href='#'>Profil</a>
+            <ul>
+               <li><a href='{{ path('fos_user_profile_show')}}'>Afficher mon profil</a></li>
+               <li class="has-sub"><a href=''> Modifier mon profil </a>
+                  <ul>
+                     <li><a href='{{ path('manblioUpdateProfilUser')}}'>Mes informations</a></li>
+                     <li><a href='{{ path('manblioUpdateProfilPicture')}}'>Mon avatar</a></li>
+                     <li><a href='{{ path('fos_user_change_password')}}'>Mon mot de passe</a></li>
+                     <li><a href='{{ path('fos_user_profile_edit')}}'>Mon profil</a></li>
+                     <li><a href='{{ path('manblioDisabledPageAcount')}}'>Désactiver mon profil</a></li>
+                  </ul>
+               </li>
+            </ul>
+         </li>
+      {% endif %}
+      {% if is_granted('ROLE_ADMIN') %}
+         <li><a href='{{ path('manblioAdminUsers')}}'>Gestion des profils</a></li>
+      {% endif %}
+      <li><a href='#'>Contact</a></li>
+   </ul>
+</div>

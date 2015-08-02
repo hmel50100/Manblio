@@ -1,0 +1,24 @@
+# role User
+ajouterPossession:
+    path:     /ajouterPossession/{id}/{idSerie}
+    defaults: { _controller: ManblioLivreBundle:Admin:ajouterPossession}
+
+supprimerPossession:
+    path:     /supprimerPossession/{id}/{idSerie}/{idTome}
+    defaults: { _controller: ManblioLivreBundle:Admin:supprimerPossession}
+
+maCollection:
+    path:    /maCollection
+    defaults: { _controller: ManblioLivreBundle:Admin:maCollection}
+
+dernierAjouts:
+    path:    /dernierAjouts
+    defaults: { _controller: ManblioLivreBundle:Admin:afficherDernierNumero}
+
+ajouterPlusieurPossession:
+    path:    /ajoutPlusPoss
+    defaults: { _controller: ManblioLivreBundle:Admin:ajouterPlusieursPossession}
+
+ajouterToutCollection:
+    path:    /ajoutToutPoss/{serie}
+    defaults: { _controller: ManblioLivreBundle:Admin:ajouterTousPossession}

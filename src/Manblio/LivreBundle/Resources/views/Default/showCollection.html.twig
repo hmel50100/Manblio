@@ -1,0 +1,30 @@
+{% extends "::base.html.twig" %}
+
+{% block principale %}
+	<div id="accordion">
+		{% for serie in series %}
+			{% set i =  0 %}
+			{% set maxTome= 0 %}
+
+			
+			<h3> {{serie.livre.nomSerie}}  <span class="right" id="{{serie.livre.id}}"></span></h3>
+			<div>
+				{% for livre in serie.livre.livre %}
+					{% for book in livreByUser if livre.id == book.livre.id and book is not empty%}
+			    		{% set i =  i + 1 %}
+
+			    		<div class="listing" id="{{livre.id}}">
+	              			<p> Tome {{livre.numero}}</p>
+						</div>
+						<script> $('#{{serie.livre.id}}').text('({{i}} tomes / {{serie.max}})');</script>
+					{% endfor %}
+				{% endfor %}
+			</div>	
+		{% endfor %}
+	</div>
+	<script>
+		$("#accordion").accordion({ 
+	      heightStyle: "content" 
+	    });
+	</script>
+{% endblock %} 

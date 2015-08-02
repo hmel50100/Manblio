@@ -1,0 +1,114 @@
+{% extends "::base.html.twig" %}
+
+{% block principale %}
+	<div id="accordion">
+		<h3> {{serie.nomSerie}} - {{serie.auteur}} </h3>
+			<div>
+				<div class="description"> 
+					<p>{{ serie.description|nl2br }} </p>
+			 	</div>
+			 	<div class="image">
+			 		<img class="image" src="{{ asset('fichiers/images/nomSerie/') }}{{serie.fileName}}" alt="Image serie"/>
+				</div>
+				<hr/>
+				<button id="afficheur" class="btn"> </button> &nbsp; 
+				<button class="btn" onClick='self.location.href="{{path("ajouterToutCollection",{"serie":serie.id})}}"'> Ajouter tous à ma collection </button>
+				<br/>
+				<div id="ajoutMultiple">
+					<hr/>
+					<form method="post" action="{{path('ajouterPlusieurPossession')}}">
+						Ajouter du numero : 
+						<input type="text" readonly="readonly" id ="du" name="du"/>
+						au : 
+						<input type="text" readonly="readonly" id ="au" name="au"/>
+						<br>
+						<div style='width:500px;' id="slider"></div>
+						<input type="hidden"  id="cacher" value='{{serie.id}}' name="serie"/>
+
+							<br/>
+						<label for="submit"> &nbsp; </label>
+						<input type="submit" class="btn" value="Ajouter">
+					</form>
+					
+						<br/>
+					
+				<hr/>
+				</div>
+				<div class='contentListing'>
+					{% set nbreMax = 0 %}
+					{% for tome in livres %}
+						{% set nbreMax = nbreMax + 1 %}
+					    <div class="listing" id="{{tome.id}}">
+			              	<p> Tome {{tome.numero}}</p>
+			              	<p> {{tome.prix}} € </p>
+			              	<p> 
+			              		{% for text in livreByUser if tome.id == text.livre.id %}
+									<ul id="icons" class="ui-widget ui-helper-clearfix">
+										<a href="{{ path('supprimerPossession', {'id':text.id, 'idSerie':tome.nomSerie.id,'idTome':tome.id})}}">
+				                  			<li class="ui-state-default ui-corner-all" title="Retirer {{serie.nomSerie}} n° {{tome.numero}} dans ma collection">
+				                    			<span class="ui-icon ui-icon-minusthick"></span>
+				                  			</li>
+				                		</a>
+				                	</ul>
+						 		{% else %}
+									<ul id="icons" class="ui-widget ui-helper-clearfix">
+										<a href="{{ path('ajouterPossession', {'id':tome.id, 'idSerie':tome.nomSerie.id})}}">
+		                  					<li class="ui-state-default ui-corner-all" title="Ajouter {{serie.nomSerie}} n° {{tome.numero}} dans ma collection">
+		                    					<span class="ui-icon ui-icon-circle-plus"></span>
+		                  					</li>
+		                				</a>
+		                			</ul>
+		                		{% endfor %}
+		                	</p>
+		            	</div>
+					{% endfor %}
+				</div>
+			</div>
+	</div>
+	<script>
+		$("#accordion").accordion({ 
+	      heightStyle: "content",
+	      icons: null 
+	    });
+
+	    $( "#dialog-link, #icons li" ).hover(
+	      function() {
+	        $( this ).addClass( "ui-state-hover" );
+	      },
+	      function() {
+	        $( this ).removeClass( "ui-state-hover" );
+	      }
+	    );
+
+	    $("#slider").slider({
+      		range: true,
+      		min: 1,
+      		max: {{nbreMax}},
+      		values: [ 1, {{nbreMax}} ],
+	      		slide: function( event, ui ) {
+	        		$( "#du" ).val(ui.values[ 0 ]);
+	        		$( "#au" ).val(ui.values[ 1 ]);
+
+      			}
+      	
+      	});
+      	   	$( "#du" ).val('1');
+      		$("#au").val('{{nbreMax}}');
+
+	    
+	    	$('#afficheur').click(function(){
+	    		if($('#ajoutMultiple').is(":visible")){
+	    			$('#ajoutMultiple').hide();
+	    			 $('#afficheur').html('Ajout multiple (+)')
+	    		}
+	    		else{
+	    			$('#ajoutMultiple').show();
+	    			 $('#afficheur').html('Ajout multiple (-)')
+	    		}
+	    })
+	        
+	    $('#ajoutMultiple').hide();
+	    $('#afficheur').html('Ajout multiple (+)');
+	    $('#cacher').hide();
+	</script>
+{% endblock %}

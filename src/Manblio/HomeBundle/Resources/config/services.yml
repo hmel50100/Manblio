@@ -1,0 +1,6 @@
+# services:
+#     Manblio.Error.email:
+#         class: Manblio\HomeBundle\Listener\MyErrorListener
+#         arguments: ["henri50100@gmail.com"]
+#         tags:
+#             - { name: kernel.event_listener, event: kernel.exception, method: errorListener }

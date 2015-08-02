@@ -1,0 +1,32 @@
+#role Lecteur
+gestionBibliotheque:
+    path:     /affiche
+    defaults: { _controller: ManblioLivreBundle:Admin:admin }
+    
+ajouterNomSerie:
+    path:     /ajouterNomSerie
+    defaults: { _controller: ManblioLivreBundle:Admin:ajouterSerie }
+
+ajouterLivre:
+    path:     /ajouterLivre
+    defaults: { _controller: ManblioLivreBundle:Admin:ajouterLivre }
+
+supprimeLivre:
+    path:     /deleteLivre/{id}/{idSerie}
+    defaults: { _controller: ManblioLivreBundle:Admin:supprimerLivre}
+
+modifierLivre:
+    path:     /modifierLivre/{id}
+    defaults: { _controller: ManblioLivreBundle:Admin:modifierLivre}
+
+AjouterSerie:
+    path:    /ajouterAllTome
+    defaults: { _controller: ManblioLivreBundle:Admin:createAllSerie}
+
+setFinish:
+    path:   /SetFinish/{id}
+    defaults: { _controller: ManblioLivreBundle:Admin:setFinish}
+
+setNonFinish:
+    path:  /SetNonFinish/{id}
+    defaults: { _controller: ManblioLivreBundle:Admin:setNotFinish}

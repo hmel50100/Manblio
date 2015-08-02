@@ -1,0 +1,57 @@
+{% extends "::base.html.twig" %}
+
+{% block principale %}
+	{% set sommeTotal = 0 %}
+	{% set nbreLivre = 0 %}
+	{% set manqueLivre = 0 %}
+	
+	<div id="accordion">
+		<h3> Votre Collection </h3>
+		<div>
+			<div id="collection">
+			</div>
+		</div>
+		
+		{% for serie in series %}
+			<h3> {{serie.livre.nomSerie}} <span class="right" id="{{serie.livre.id}}"></span></h3>
+			<div>
+				{% set sommeCollection = 0 %}
+				{% set i =  0 %}
+				{% for livre in serie.livre.livre %} 
+					{% for book in livreByUser if livre.id == book.livre.id and book is not null %}
+					    {% set sommeCollection = sommeCollection + livre.prix %}
+					    	{% set i =  i + 1 %}
+
+					    <div class="listing" id="{{livre.id}}">
+			              	<p> Tome {{livre.numero}}</p>
+			              	<p> {{livre.prix}} € </p>
+			              	{% set sommeTotal= sommeTotal+livre.prix %}
+			              	{% set nbreLivre = nbreLivre+1 %}
+						</div>
+						
+						<script> $('#{{serie.livre.id}}').text('{{ sommeCollection }} € ({{i}} tomes / {{serie.max}})');</script>	
+					{% endfor %}
+
+				{% endfor %}
+				{% set manqueLivre= manqueLivre+(serie.max - i) %}
+			</div>	
+		{% endfor %}
+			
+	</div>
+	<script>
+		document.getElementById('collection').innerHTML = " Votre collection comporte : {{nbreLivre}} Livres </br> Elle est evaluée à : {{sommeTotal}} €<br/> Il vous manque : {{manqueLivre}} Livres";
+
+		$("#accordion").accordion({ 
+	      heightStyle: "content" 
+	    });
+
+	    $( "#dialog-link, #icons li" ).hover(
+	      function() {
+	        $( this ).addClass( "ui-state-hover" );
+	      },
+	      function() {
+	        $( this ).removeClass( "ui-state-hover" );
+	      }
+	    );
+	</script>
+{% endblock %}

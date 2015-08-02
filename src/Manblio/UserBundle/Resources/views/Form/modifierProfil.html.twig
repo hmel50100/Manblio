@@ -1,0 +1,26 @@
+{% extends "::base.html.twig" %}
+
+{% block principale %}
+	<div id="accordion">
+	  	<h3>Modifier votre profil</h3>
+  		<div>
+	 		<form method="post" action="{{ path('manblioUpdateProfilUser')}}">
+				{{form_widget(form)}}
+
+				<div>
+					<label for="ajouter">&nbsp;</label>
+					<input type="submit" id="ajouter" value="Modifier">
+				</div>
+			</form>
+  		</div>
+	</div>
+
+	<script>
+	    $(document).ready(function() {
+	        $('.date').datepicker({ dateFormat: 'dd-mm-yy' })
+	        $( "#accordion" ).accordion({icons: null});
+	    });
+    </script>
+
+	
+{% endblock %}

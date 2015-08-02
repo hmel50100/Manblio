@@ -1,0 +1,15 @@
+manblioUpdateProfilUser:
+    path:     /setProfil
+    defaults: { _controller: ManblioUserBundle:Admin:modifierProfil }
+
+manblioUpdateProfilPicture:
+    path:     /setProfilPicture
+    defaults: { _controller: ManblioUserBundle:Admin:modifierProfilPitcure }
+
+manblioDisabledPageAcount:
+    path:     /disabledPageAccount
+    defaults: { _controller: ManblioUserBundle:Admin:disabledAccount }
+
+ManblioDesactiverMonProfil:
+    path:     /disabledAccount
+    defaults: { _controller: ManblioUserBundle:Admin:disabled }

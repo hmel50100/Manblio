@@ -1,0 +1,38 @@
+# you can read more about security in the related section of the documentation
+# http://symfony.com/doc/current/book/security.html
+security:
+    # http://symfony.com/doc/current/book/security.html#encoding-the-user-s-password
+    encoders:
+        FOS\UserBundle\Model\UserInterface: sha512
+
+    # http://symfony.com/doc/current/book/security.html#hierarchical-roles
+    role_hierarchy:
+        ROLE_LECTEUR:     ROLE_USER
+        ROLE_ADMIN:       [ROLE_LECTEUR, ROLE_USER]
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
+    providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username
+
+    # the main part of the security, where you can set up firewalls
+    # for specific sections of your app
+    firewalls:
+        main:
+            pattern: ^/
+            form_login:
+                provider: fos_userbundle
+                csrf_provider: form.csrf_provider
+            logout: true
+            anonymous: true
+            remember_me:
+                key:      "%secret%"
+                lifetime: 2678400 # 31 jours en seconde
+                path:     /
+                domain:   ~
+
+    access_control:
+        - { path: ^/user, roles: ROLE_USER }
+        - { path: ^/lecteur, roles: ROLE_LECTEUR }
+        - { path: ^/admin, roles: ROLE_ADMIN }

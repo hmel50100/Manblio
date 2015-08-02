@@ -1,0 +1,19 @@
+{% extends "::base.html.twig" %}
+
+{% block principale %}
+	<div id="accordion">
+		<h3> Les derniers tomes de ma collection </h3>
+		<div>
+				{% for serie in series %}
+					<p>{{serie.serie}} --> Tome {{ serie.numero }}</p>					
+				{% endfor %}
+		</div>
+	</div>
+
+	<script>
+		$("#accordion").accordion({ 
+	      heightStyle: "content",
+	      icons:null 
+	    });
+	</script>
+{% endblock %}

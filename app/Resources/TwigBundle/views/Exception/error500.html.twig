@@ -1,0 +1,34 @@
+{% extends "::error.html.twig" %}
+{% block principale %}
+ 	<fieldset class='error'>
+ 		<legend> <h1>Erreur :</h1> </legend>
+ 		<h2> Erreur 500 Erreur interne </h2>
+ 		<h4> La page que vous avez demandé comporte des erreurs, elle n'est pas accessible</h4>
+ 		<p> Un Email sera envoyé au webmaster </p>
+ 		
+ 		<button class="btn" id="afficheur">  </button>
+		 	<div id="cacher">
+		 			Code Erreur : {{ status_code }}
+		 			<br/>
+		 			Statut de l'erreur : {{ status_text }}
+		 			<br/>
+		 			Url Demandé : {{app.request.requestUri}}
+		 		</div>
+ 	</fieldset>
+ 	
+ 	<script>
+ 	$('#afficheur').click(function(){
+	    if($('#cacher').is(":visible")){
+			$('#cacher').hide();
+			$('#afficheur').html('Detail (+)')
+	    }
+		else{
+			$('#cacher').show();
+			$('#afficheur').html('Detail (-)')
+		}
+	    })
+	        
+	    $('#cacher').hide();
+	    $('#afficheur').html('Detail (+)');
+	   </script>
+{% endblock %}

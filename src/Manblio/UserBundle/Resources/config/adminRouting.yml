@@ -1,0 +1,24 @@
+manblioChangeRole:
+    path:     /changeRole/{role}/{id}
+    defaults: { _controller: ManblioUserBundle:Admin:changerRole }
+    
+manblioAdminUsers:
+    path:     /administration
+    defaults: { _controller: ManblioUserBundle:Admin:gestionUser }
+
+manblioBlockUser:
+    path:     /block/{id}
+    defaults: { _controller: ManblioUserBundle:Admin:blockUser }
+
+manblioDeblockUser:
+    path:     /deblock/{id}
+    defaults: { _controller: ManblioUserBundle:Admin:deblockUser }
+
+manblioEnabledAcount:
+    path:     /enabled/{id}
+    defaults:  { _controller: ManblioUserBundle:Admin:enabledUser }
+
+ManblioDesactiverProfil:
+    path:     /disabled/{id}
+    defaults:  { _controller: ManblioUserBundle:Admin:disabledUser }
+

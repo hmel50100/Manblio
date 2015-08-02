@@ -1,0 +1,100 @@
+{% extends '::base.html.twig' %}
+
+{% block principale %}
+	<div class="clean">
+		<div class="home">
+			<div class="homeAccordion">
+				<h3> Derniers tomes :</h3>
+					<div>
+						{% for tome in tomes %}
+								<a href="{{path('detailSerie', {'id': tome.nomSerie.id})}}#{{tome.id}}">{{tome.nomSerie}} - Tome {{tome.numero}} </a>
+								<br/>
+								<span class="right">ajouter par : <a href="{{ path('manblioAffichProfil', {'id':tome.quiCree.id})}}">{{tome.quiCree}}</a></span>   
+							<hr>
+						{% endfor %}
+					</div>
+			</div>
+		</div>
+		<div class="home">
+			<div class="homeAccordion"> 
+				<h3> Dernière série :</h3>
+					<div>
+						{{serie.nomSerie}}  -  {{serie.auteur}}
+						<hr>
+						<p class="descript">
+							<img class="seriePicture" src=" {{ asset('fichiers/images/nomSerie/') }}{{serie.fileName}}" id="ImgSerie" alt="imgSerie"/>
+							{% if serie.description|length > 400 %}
+								{{serie.description[:400]|nl2br}} ... 
+							{% else %}
+								{{serie.description[:400]|nl2br}}
+							{% endif %}
+					<button class="btn" onclick="self.location.href='{{ path('detailSerie', {'id':serie.id})}}'"> Lire la suite </button>
+						</p>
+						<br/>
+
+					</div>
+			</div>
+		</div>
+	</div>
+	<div class="clean">
+		<div class="home">
+			<div class="homeAccordion">
+				<h3> Derniers utilisateur inscrit :</h3>
+					<div>
+						<div class="clickable" onclick="self.location.href='{{ path('manblioAffichProfil', {'id':utilisateur.id})}}'">
+						    <table>
+						    	<tr>
+						    		<td rowspan ="2" style="width:110px">
+									    {% if utilisateur.fileName != null %}
+					                        <img src=" {{ asset('fichiers/images/imageProfil/') }}{{utilisateur.fileName}}" id="imgProfil" alt="image Profil"/>   
+					                    {% else %}
+					                        <img src="{{ asset('fichiers/images/site/anonyme.png') }}" id="imgProfil" alt="image Profil"/>  
+					                    {% endif %}
+					                </td>
+					                <td> {{utilisateur.username}} </td>
+					            </tr>
+			                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+			                    	<tr>
+			                    		<td> {{utilisateur.email}} </td>
+			                    	</tr>
+			                	{% endif %}
+		                   </table>
+						</div>
+					</div>
+			</div>
+		</div>
+		<div class="home">
+			<div class="homeAccordion">
+				<h3> Derniers ajouts en collection :</h3>
+					<div>
+						{%for possession in possession%}
+							<a href="{{ path('manblioAffichProfil', {'id':possession.utilisateur.id})}}">{{possession.utilisateur}} </a>  à ajouter
+								<br/>
+								<span class="right"> <a href="{{path('detailSerie', {'id': possession.livre.nomSerie.id})}}#{{possession.livre.id}}">{{possession.livre.NomSerie }} Tome {{possession.livre.numero }}</a> à  <a href="{{path('ManblioShowCollection', {'id': possession.utilisateur.id})}}"> sa collecion </a></span>   
+								
+							<hr>
+						{% endfor %}
+					</div>
+			</div>
+		</div>
+	</div>
+	<script> 
+	$('.homeAccordion').accordion({
+		icons: null,
+		heightStyle: "content"
+	});
+
+	$('.clickable').css('cursor', 'pointer');
+
+	$('h3').css('cursor', 'default');
+
+	$( "#dialog-link, #icons li" ).hover(
+		      function() {
+		        $( this ).addClass( "ui-state-hover" );
+		      },
+		      function() {
+		        $( this ).removeClass( "ui-state-hover" );
+		      }
+		    );
+	</script>
+{% endblock %}

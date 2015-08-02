@@ -1,0 +1,38 @@
+{% extends "::base.html.twig" %}
+
+{% block principale %}
+	<div id="accordion">
+		{% for serie in series %}
+			{% set nbre = 0 %}
+					{% for livre in serie.livre %}
+						{% set nbre = nbre + 1 %}
+					{% endfor %}
+			<h3> {{serie.nomSerie}} - {{serie.auteur}} <span class="right"> {% if serie.isFinish %} La série est terminée {% endif %} ( {{nbre}} Tome )</span></h3>
+				<div>
+					<div class="description"> 
+
+						<p>{{ serie.description }} </p>
+				 		<p>
+				 			<button class="btn" onclick="self.location.href='{{ path('detailSerie', {'id':serie.id})}}'"> Album de la série </button>
+				 			 {% if is_granted('ROLE_USER') %}
+				 			 	<button class="btn" onClick='self.location.href="{{path("ajouterToutCollection",{"serie":serie.id})}}"'> Ajouter tous les tomes à la collection</button>
+
+				 			 	{% if serie.isFinish %}
+				 			 		<button class="btn" onClick='self.location.href="{{path("setNonFinish",{"id":serie.id})}}"'> Serie incomplète </button>
+				 			 	{% else %}
+				 			 		<button class="btn" onClick='self.location.href="{{path("setFinish",{"id":serie.id})}}"'> Serie complete </button>
+				 			 	{% endif %}
+				 			 {% endif %}
+				 		</p>
+				 	</div>
+				 	<div class="image">
+				 		<img class="image" src="{{ asset('fichiers/images/nomSerie/') }}{{serie.fileName}}" alt="Image serie"/>
+					</div>
+				</div>
+		{% endfor %}
+	</div>
+	    {% include 'ManblioLivreBundle:Default:pagination.html.twig' %}
+	<script>
+		$( "#accordion" ).accordion();
+	</script>
+{% endblock %}

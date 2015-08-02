@@ -1,0 +1,46 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div id="principale">
+	<h3> Enregistrement </h3>
+	<div>
+		<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+		    {{ form_widget(form) }}
+
+		    <div> 
+		    	<p> Vous devez lire et accepter les  <a id="link" href="{{ asset('fichiers/documents/CGU_Manblio.pdf') }}" target="_blank"> conditions générale d'utilisation (CGU)</a> afin de crée votre compte  <input type="checkbox" id="actioneur"/></p>
+		    	
+		   </div>
+		    <div>
+		        <input type="submit" value="{{ 'registration.submit'|trans }}" id='hide' class="btn"/>
+		    </div>
+		</form>
+	</div>
+</div>
+
+<script> 
+	$("#principale").accordion({icons:null});
+
+	var lien=false;
+
+	$('#link').click(function(){
+		lien=true;
+	});
+
+	$("#actioneur").click(function(){
+		if(lien==true){
+			if($('#actioneur').is(':checked')){
+				$('#hide').show();
+			}
+			else{
+				$('#hide').hide();
+			}
+		}
+		else{
+			$("#actioneur").prop('checked', false);
+			alert('Vous devez lire les CGU pour cocher la case (click sur le lien si dessus)');
+
+		}
+	})
+	$('#hide').hide();
+	
+</script>

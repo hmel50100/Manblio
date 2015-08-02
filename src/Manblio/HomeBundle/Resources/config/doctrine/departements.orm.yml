@@ -1,0 +1,27 @@
+Manblio\HomeBundle\Entity\departements:
+    type: entity
+    table: null
+    repositoryClass: Manblio\HomeBundle\Entity\departementsRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        code:
+            type: string
+            length: '3'
+        nom:
+            type: string
+            length: '255'
+        nomUpperCase:
+            type: string
+            length: 255
+        slug:
+            type: string
+            length: 255
+        nomSoundex:
+            type: string
+            length: '20'
+    lifecycleCallbacks: {  }

@@ -1,0 +1,17 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div id="accordion">
+	<h3> Modifier mon profil </h3>
+	<div>
+		<form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
+		    {{ form_widget(form) }}
+		    <div>
+		        <input type="submit" value="{{ 'profile.edit.submit'|trans }}" class="btn"/>
+		    </div>
+		</form>
+	</div>
+</div>
+
+<script>
+	$("#accordion").accordion({icons:null});
+</script>

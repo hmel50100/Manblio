@@ -1,0 +1,38 @@
+{% extends "::base.html.twig" %}
+
+{% block principale %}
+	<div id="accordion">
+		<h3> {{serie.nomSerie}} - {{serie.auteur}} </h3>
+			<div>
+				<div class="description"> 
+					<p>{{ serie.description|nl2br }} </p>
+			 	</div>
+			 	<div class="image">
+			 		<img class="image" src="{{ asset('fichiers/images/nomSerie/') }}{{serie.fileName}}" alt="Image serie"/>
+				</div>
+				<div style="clear:both"> 
+					{% for tome in livres %}
+				    	<div class="listing" id="{{tome.id}}">
+		              		<p> Tome {{tome.numero}}</p>
+		              		<p> {{tome.prix}} € </p>
+		            	</div>
+					{% endfor %}
+			</div>
+		</div>
+	</div>
+	<script>
+		$("#accordion").accordion({ 
+	      heightStyle: "content",
+	      icons: null
+	    });
+
+	    $( "#dialog-link, #icons li" ).hover(
+	      function() {
+	        $( this ).addClass( "ui-state-hover" );
+	      },
+	      function() {
+	        $( this ).removeClass( "ui-state-hover" );
+	      }
+	    );
+	</script>
+{% endblock %}

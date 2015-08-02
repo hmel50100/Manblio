@@ -1,0 +1,71 @@
+<div class="resultats">
+	<div class="accordionResultats">
+		<h3> Utilisateurs Trouvés </h3>
+			<div style="max-height:400px; overflow-y:auto; overflow-x: hidden">
+			{% for user in users if user.id != "" and user.id != 1 %}
+				<div class="resultat" onclick="self.location.href='{{ path('manblioAffichProfil', {'id':user.id})}}'">
+				    <table>
+				    	<tr>
+				    		<td rowspan ="2" style="width:110px">
+							    {% if user.fileName != null %}
+			                        <img src=" {{ asset('fichiers/images/imageProfil/') }}{{user.fileName}}" id="imgProfil" alt="image Profil"/>   
+			                    {% else %}
+			                        <img src="{{ asset('fichiers/images/site/anonyme.png') }}" id="imgProfil" alt="image Profil"/>  
+			                    {% endif %}
+			                </td>
+			                <td> {{user.username}} </td>
+			            </tr>
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    <tr>
+                    	
+                    	<td> {{user.email}} </td>
+                    </tr>
+                {% endif %}
+                   </table>
+                                        
+				</div>
+				<br/>
+			{% else %}
+				Aucun utilisateur pour ce mot clé
+			{% endfor %}
+			</div>
+	</div>
+</div>
+<div class="resultats">
+	<div class="accordionResultats"> 
+		<h3> Serie Trouvé :</h3>
+			<div style="max-height:400px; overflow-y:auto; overflow-x: hidden">
+			{% for livre in livres if livre != ""%}
+				<div class="resultat" onclick="self.location.href='{{ path('detailSerie', {'id':livre.id})}}'">
+					<table>
+						<tr>
+				    		<td rowspan ="2" style="width:110px">
+							    {% if livre.fileName != null %}
+			                        <img src=" {{ asset('fichiers/images/nomSerie/') }}{{livre.fileName}}" id="imgProfil" alt="image Profil"/>   
+			                    {% else %}
+			                        <img src="{{ asset('fichiers/images/site/livre.png') }}" id="imgProfil" alt="image Profil"/>  
+			                    {% endif %}
+			                </td>
+			                <td> {{livre.nomSerie}} </td>
+			            </tr>
+                    
+                    <tr>
+                    	
+                    	<td> {{livre.auteur}} </td>
+                    </tr>
+                   </table>
+                                        
+				</div>
+				<br/>
+			{% else %}
+				Aucune série pour ce mot clé
+			{% endfor %}
+			</div>
+	</div>
+</div>
+<script> 
+$('.accordionResultats').accordion({
+	icons: null,
+	heightStyle: "content",
+});
+</script>

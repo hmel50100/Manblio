@@ -1,0 +1,62 @@
+{% extends '::base.html.twig' %}
+{% block principale %}
+	<div id="texte">
+		<h3> Désactivation du compte </h3>
+		<div>
+			<p>
+			En cliquant sur le boutton ci-dessous, vous allez désactiver le compte: <br/>
+			</p>
+
+			{{app.user.username}}
+			<br/>
+			
+			<p>
+			Votre compte sera desctivé, mais il ne sera pas supprimé. 
+			</p>
+			<p>
+			Conformement aux lois informatiques et libértés, vous pouvez, en envoyant un mail dans la rubrique contact, demander au webmaster d'accéder, de modifier ou de supprimer toutes les données associées à votre compte. 
+
+			</p>
+			<p>
+			Vos informations seront integralement et automatiquement supprimées 6 mois aprés la date de votre demande. 
+			</p>
+			<p>
+			Si dans les 6 mois vous souhaitez reprendre votre profil, il suffit d'envoyer un mail au webmaster dans la rubrique contact (disponible sans être conneté) au moins 2 semaines avant l'echéance.
+			<br/> 
+			Après ce delai, toutes les informations vous concernant seront irreverssiblement supprimées et tous les ajouts que vous avez effectués seront crédités au compte super-admin
+
+			</p>
+			Saisir : <span id='chaine'></span> dans le cadre si dessous pour valider votre désinscription afin de pouvoir accéder au bouton <br/>
+			<input type="text" id="confirmer"/>
+			<button id="btn" class="btn" onClick="location.href='{{ path('ManblioDesactiverMonProfil')}}'"> Je veux désactiver mon profil </button>
+		</div>
+	</div>
+
+	<script>
+		var chaineAleatoire= ChaineAleatoire();
+
+		function ChaineAleatoire(){
+		var ListeCar = new Array("a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","0","1","2","3","4","5","6","7","8","9");
+		var Chaine ='';
+		for(i = 0; i < 10; i++)
+		{
+			Chaine = Chaine + ListeCar[Math.floor(Math.random()*ListeCar.length)];
+		}
+		return Chaine;
+		}	 
+		$('#chaine').text(chaineAleatoire);
+		$("#texte").accordion({icons:null});
+		$('#btn').hide();
+			$('#confirmer').keyup(function(){
+				console.log('attendu '+chaineAleatoire)
+				if($('#confirmer').val() == chaineAleatoire){
+					$('#btn').show();
+				}
+				else{
+					$('#btn').hide();
+				}
+			});
+
+
+	</script>
+{% endblock %}

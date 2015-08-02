@@ -1,0 +1,22 @@
+{% extends "::base.html.twig" %}
+
+{% block principale %}
+	<div id="accordion">
+		<h3> Modifier votre image de profil </h3>
+		<div>
+			<form method="post" action="{{ path('manblioUpdateProfilPicture')}}"  enctype="multipart/form-data">
+			
+				{{form_widget(form)}}
+
+				<div>
+					<label for="ajouter">&nbsp;</label>
+					<input type="submit" id="ajouter" value="Modifier">
+				</div>
+			</form>
+		</div>		
+	</div>
+	
+	<script>
+		$("#accordion").accordion({icons:null});
+	</script>
+{% endblock %}

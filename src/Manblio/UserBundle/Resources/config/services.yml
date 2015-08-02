@@ -1,0 +1,7 @@
+# services:
+#     manblio.user.user.listener:
+#         class: Manblio\UserBundle\Listener\MyUserListener
+#         arguments:
+#             - @doctrine.orm.entity_manager
+#         tags:
+#             - { name: kernel.event_listener, event: kernel.controller, method: chercherUnusedProfil }

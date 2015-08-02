@@ -1,0 +1,61 @@
+#FOS
+fosUserSecurity:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+
+# public
+Home:
+    resource: "@ManblioHomeBundle/Resources/config/routing.yml"
+    prefix:   /
+
+User:
+    resource: "@ManblioUserBundle/Resources/config/routing.yml"
+    prefix:   /utilisateur
+
+Livre:
+    resource: "@ManblioLivreBundle/Resources/config/routing.yml"
+    prefix:   /livre
+
+fosUserConnexion:
+    prefix: /login
+    path: /login
+
+fosUserRegister:
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix: /register
+
+fosUserReseting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /reseting
+
+
+# role user
+userLivre:
+    resource: "@ManblioLivreBundle/Resources/config/userRouting.yml"
+    prefix:   /user/livre
+
+UserUser:
+    resource: "@ManblioUserBundle/Resources/config/userRouting.yml"
+    prefix:   /user/user
+
+fosUserProfile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /user/profile
+
+fosUserChangePassword:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix: /user/change_password
+
+#role lecteur
+LecteurLivre:
+    resource: "@ManblioLivreBundle/Resources/config/lecteurRouting.yml"
+    prefix:   /lecteur/livre
+LecteurUser:
+    resource: "@ManblioUserBundle/Resources/config/lecteurRouting.yml"
+    prefix:   /lecteur/utilisateur
+
+#role Admin
+
+AdminUser:
+    resource: "@ManblioUserBundle/Resources/config/adminRouting.yml"
+    prefix:   /admin/user
+

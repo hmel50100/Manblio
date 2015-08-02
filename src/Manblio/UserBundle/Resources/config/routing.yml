@@ -1,0 +1,4 @@
+manblioAffichProfil:
+    path:     /profil/{id}
+    defaults: { _controller: ManblioUserBundle:Default:afficheProfil }
+

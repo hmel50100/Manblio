@@ -1,0 +1,98 @@
+{% extends '::base.html.twig' %}
+
+{% block principale %}
+	<div id="accordion">
+		<h3> Gestion des utilisateurs </h3>
+		<div>
+			<table class="admin">
+				<tr class="admin"> 
+					<td class="admin"> Nom d'utilisateur </td>
+					<td class="admin"> Adresse Mail </td>
+					<td class="admin"> Dernière Connexion </td>
+					<td class="admin" colspan="3"> Gestion </td>
+				</tr>
+				{% for user in users if user.id != 1%}
+					<tr class="admin" id="{{user.id}}">
+						<td class="admin"> 
+							{{user.username}} <br/>
+							{{user.usernameCanonical}}
+						</td>
+						<td class="admin"> 
+							{{user.email}} <br/>
+							{{user.emailCanonical}}
+						</td>
+						<td class="admin"> {{user.lastLogin|date('d/m/Y')}} </td>
+						<td class="admin">
+							{% if user.locked == 1 %}
+								<ul id="icons" class="ui-widget ui-helper-clearfix">
+									<a href="{{path('manblioDeblockUser',{'id':user.id}) }}">
+						                <li class="ui-state-default ui-corner-all" title="Débloqué l'utilisateur">
+						                    <span class="ui-icon ui-icon-locked"></span>
+						                </li>
+						            </a>
+						        </ul>
+							{% else %}
+								<ul id="icons" class="ui-widget ui-helper-clearfix">
+									<a href="{{path('manblioBlockUser',{'id':user.id}) }}">
+				                  		<li class="ui-state-default ui-corner-all" title=" Bloqué l'utilisateur">
+				                    		<span class="ui-icon ui-icon-unlocked"></span>
+				                  		</li>
+				                	</a>
+				                </ul>
+							{% endif %}
+
+							{% if user.enabled == 1 %}
+								<ul id="icons" class="ui-widget ui-helper-clearfix">
+									<a href="{{path('ManblioDesactiverProfil',{'id':user.id}) }}">
+						                <li class="ui-state-default ui-corner-all" title="Desactiver l'utilisateur">
+						                    <span class="ui-icon ui-icon-circle-close"></span>
+						                </li>
+						            </a>
+						        </ul>
+							{% else %}
+								<ul id="icons" class="ui-widget ui-helper-clearfix">
+									<a href="{{path('manblioEnabledAcount',{'id':user.id}) }}">
+				                  		<li class="ui-state-default ui-corner-all" title="Activer l'utilisateur">
+				                    		<span class="ui-icon ui-icon-circle-check"></span>
+				                  		</li>
+				                	</a>
+				                </ul>
+							{% endif %}
+
+						</td>
+			 			<td class="admin">
+			 				<select name="role" id="role{{user.id}}" class="role" onchange='changer()'>
+						 		{% if 'ROLE_ADMIN' in user.roles %}
+									<option>User</option>
+					      			<option>Lecteur</option>
+					      			<option selected="selected">Admin</option>
+								{% elseif 'ROLE_LECTEUR' in user.roles %}
+									<option>User</option>
+					      			<option selected="selected">Lecteur</option>
+					      			<option>Admin</option>
+								{% else %}
+									<option selected="selected">User</option>
+					      			<option>Lecteur</option>
+					      			<option>Admin</option>
+								{% endif %}
+		        			</select>
+						</td>
+					</tr>
+					<script>
+			   			$( "#role{{user.id}}" ).selectmenu({
+							change: function( event, data ) {        				
+		        				var url = '{{ path("manblioChangeRole", {'role': 'role', 'id':user.id}) }}'; 
+								url = url.replace("role", data.item.value);
+		        				$(location).attr('href',url);
+		      				}
+
+		     			});
+					</script>
+				{% endfor %}
+			</table>
+		</div>
+	</div>
+	<script>
+		$('#accordion').accordion({icons:null});
+	</script>
+{% endblock %}

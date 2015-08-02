@@ -1,0 +1,11 @@
+manblio_home_homepage:
+    path:     /
+    defaults: { _controller: ManblioHomeBundle:Default:index }
+
+manblioSearch:
+    path:     /find/user/{keyWord}
+    defaults: { _controller: ManblioHomeBundle:Default:search,keyWord:"1" }
+
+ManblioResultatSearch:
+    path:     /result
+    defaults: { _controller: ManblioHomeBundle:Default:search }

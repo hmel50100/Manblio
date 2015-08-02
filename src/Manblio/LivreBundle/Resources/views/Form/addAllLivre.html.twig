@@ -1,0 +1,46 @@
+{% extends "::base.html.twig" %}
+
+{% block principale %}
+	<div id="accordion">
+		<h3> Ajouter plusieurs tomes </h3>
+		<div>	
+			<form method="post" action="{{ path ('AjouterSerie') }}">
+
+				<div>
+					<label for='serie'> Choix serie </label>
+					<select name="serie" id="serie">
+						{% for serie in series %}
+							{% set i=0 %}
+							{% for livre in serie.livre %}
+								{% set i= i+1 %}
+							{% endfor %}
+							<option value="{{serie.id}}"> {{serie.nomSerie}} ( {{i}} tomes )</option>
+							}
+						{% endfor %}
+					</select>
+				</div>
+
+				<div>
+					<label for='prix'> Prix </label>
+					<input type="text" name="prix" id="prix"/>
+				</div>
+
+				<div>
+					<label for='nbre'> Nbre de tome à ajouter </label>
+					<input type="text" name="nbre" id="nbre"/>
+				</div>
+
+				<div>
+					<label for="ajouter">&nbsp;</label>
+					<input type="submit" id="ajouter" value="Ajouter">
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<script>
+    	$(document).ready(function() {
+        	$( "#accordion" ).accordion({icons: null});
+    	});
+    </script>
+{% endblock %}

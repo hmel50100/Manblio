@@ -1,0 +1,111 @@
+{% extends "::base.html.twig" %}
+
+  {% block principale %}
+
+  <div id="dialog-confirm" title="Supprimer ?" style="height:auto">
+    <p>
+  	  <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+  	  Confirmez vous la suppression de ce livre ?
+    </p>
+  </div>
+
+  <div id="accordion">
+    {% for livre in livres %}
+      <h3> {{livre.nomSerie}} </h3>
+        <div id="{{livre.id}}" style="empty">
+          {% for tome in livre.livre %}
+            <div class="listing" id="{{tome.id}}">
+              <p> Tome {{tome.numero}}</p>
+              <ul id="icons" class="ui-widget ui-helper-clearfix">
+                <a class="opener" id="{{tome.id}}">
+                  <li class="ui-state-default ui-corner-all" title=".ui-icon-trash">
+                    <span class="ui-icon ui-icon-trash" onclick='supprimer({{tome.id}}, {{livre.id}},"{{livre.nomSerie}}","{{tome.numero}}")'></span>
+                  </li>
+                </a>
+                <a href="{{path('modifierLivre',{'id':tome.id})}}">
+                  <li class="ui-state-default ui-corner-all" title=".ui-icon-pencil">
+                    <span class="ui-icon ui-icon-pencil"></span>
+                  </li>
+                </a>
+              </ul>
+            </div>
+          {% endfor %}
+        </div>
+    {% endfor %}
+  </div>
+
+  <script>
+    $("#accordion").accordion({ 
+      heightStyle: "content",
+    });
+
+    $( "#dialog-link, #icons li" ).hover(
+      function() {
+        $( this ).addClass( "ui-state-hover" );
+      },
+      function() {
+        $( this ).removeClass( "ui-state-hover" );
+      }
+    );
+    document.getElementById("dialog-confirm").style.display = "none"; 
+      
+      function supprimer(id, idSerie, titre, tome){
+        document.getElementById("dialog-confirm").innerHTML= "Voullez vous supprimer :<br/>"+titre+ " tome " + tome + " ?";
+
+        $(function() {
+          $( "#dialog-confirm" ).dialog({
+            resizable: true,
+            autoOpen: true,
+            show: {
+              effect: "clip",
+              duration: 1000
+            },
+            hide: {
+              effect: "clip",
+              duration: 1000
+            },
+            modal: true,
+              buttons: {
+                "Supprimer": function() {
+                  url = "{{path('supprimeLivre',{'id': 'repl_id', 'idSerie' : 'replac_id' })}}";
+                  url = url.replace('repl_id', id);
+                  url = url.replace('replac_id', idSerie)
+                  window.location= url;
+                },
+                "Annuler": function() {
+                  $( this ).dialog( "close" );
+                }
+              }
+          });
+        });
+      }
+    </script>
+    {% if app.request.query.get("error") == 1 %}
+    <script>
+      $(function() {
+        $( "#dialog-error" ).dialog({
+          modal: true,
+          show: {
+            effect: "clip",
+            duration: 1000
+          },
+          hide: {
+            effect: "clip",
+            duration: 1000
+          },
+          buttons: {
+            Ok: function() {
+                $( this ).dialog( "close" );
+            }
+          }
+        });
+      });
+    </script>
+    <div id="dialog-error" title="Erreur de suppression">
+    <p>
+      <span class="ui-icon ui-icon-cancel" style="float:left; margin:0 7px 50px 0;"></span>
+      Ce livre est attribué à un lecteur, <br />
+      il ne peut être supprimé.
+    </div>
+  {% endif %}
+{% endblock %}

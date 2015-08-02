@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block principale %}
+<div id="accordion">
+	<h3> Mail de confirmation </h3>
+	<div>
+		{{ 'resetting.check_email'|trans({'%email%': email}) }}
+	</div>
+</div>
+<script>
+	$('#accordion').accordion({icons:null});
+</script>
+{% endblock %}

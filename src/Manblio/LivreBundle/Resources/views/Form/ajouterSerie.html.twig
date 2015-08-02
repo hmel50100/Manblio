@@ -1,0 +1,94 @@
+{% extends "::base.html.twig" %}
+
+{% block principale %}
+	<div id="accordion">
+		<h3> Ajouter une nouvelle Serie </h3>
+		<div>	
+			<form method="post" action="{{ path ('ajouterNomSerie') }}" enctype="multipart/form-data">
+
+				<div> 
+					<label for="nomSerie"> Titre de la série </label>
+					<input type="text" name="nomSerie" id="nomSerie"/>
+				</div>
+				<div> 
+					<label for="auteur"> Auteur </label>
+					<input type="text" name="auteur" id="auteur"/>
+					<div id="listAuteur">Ajouter des auteurs </div> 
+					<a class="btn" id="afficheur"> Ajouter d'autre auteurs </a>
+				</div>
+				<div id="newAuteur">
+					<br/>
+					<input type="text" id="ajouteur"/>
+					<a id="addAuteur" class="btn"> Ajouter l'auteur </a>
+					<a id="vider" class="btn"> Vider la liste </a>
+					<a id="unAuteur" class="btn"> Un auteur </a>
+				</div>
+				<div>
+       				{{ form_label(form.file) }}
+        			{{ form_errors(form.file) }}
+        			{{ form_widget(form.file) }}
+    			</div>
+
+				<label for="description" > Description </label>
+				<textarea name="description" id="description" style="height:150px; width: 500px; resize:none;"></textarea>
+
+				<div>
+					<label for="ajouter">&nbsp;</label>
+					<input type="submit" id="ajouter" value="Ajouter">
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<script>
+		$('#listAuteur').hide();
+		$('#newAuteur').hide();
+    	$(document).ready(function() {
+        	$( "#accordion" ).accordion({
+        		icons: null,
+        		heightStyle: "content" 
+        	});
+    	});
+
+    	$('#afficheur').click(function(){
+    		$('#afficheur').hide();
+    		$('#auteur').hide();
+    		$('#listAuteur').show();
+    		$('#newAuteur').show();
+    	});
+
+    	$('#addAuteur').click(function(){
+    		if($('#ajouteur').val()== ''){
+	    		alert('Veuillez saisir une valeur pour ajouter un autre auteur !');
+	    	}
+	    	else {
+	    		valeur= $('#ajouteur').val();
+	    		nouvelAuteur=valeur.toLowerCase().replace( /\b./g, function(a){ return a.toUpperCase(); } );
+	    		if($('#auteur').val() == ''){ 
+	    			$('#auteur').val(nouvelAuteur);
+	    			$('#ajouteur').val('');
+	    		}
+	    		else{
+	    			$('#auteur').val($('#auteur').val()+" | " + nouvelAuteur);
+	    			$('#ajouteur').val('');
+	    		}
+	    		$('#listAuteur').text($('#auteur').val());
+	    	}
+    		});
+
+    	$('#unAuteur').click(function(){
+    		$('#afficheur').show();
+    		$('#auteur').show();
+    		$('#listAuteur').hide();
+    		$('#newAuteur').hide();
+    		$('#auteur').val('');
+    		$('#listAuteur').text($('#auteur').val());
+    	})
+    	
+    	$('#vider').click(function(){
+    		$('#auteur').val('');
+    		$('#listAuteur').text($('#auteur').val());
+    	})
+
+    </script>
+{% endblock %}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Manblio{% block title %}{% endblock %}</title>
+        {% block stylesheets %}
+            <link href="{{ asset('css/style.css') }}" type="text/css" rel="stylesheet" />
+            <link href="{{ asset('css/menu.css') }}" type="text/css" rel="stylesheet" />
+            <script src="{{ asset('script/JqueryUi/external/jquery/jquery.js') }}" type="text/javascript"></script>
+            <script src="{{ asset('script/JqueryUi/jquery-ui.js') }}" type="text/javascript"> </script>
+            
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+        {% block body %}
+            {% block en_tete %}
+                <table class="en_tete">
+                    <tr>
+                        <td>
+                            <a href="{{ path('manblio_home_homepage')}}">
+                                <img src=" {{ asset('fichiers/images/site/logo.jpg') }}" id="logo" alt="Manblio logo"/>
+                            </a>  
+                        </td>
+                         <td id="baniere">
+                            <a href="{{ path('manblio_home_homepage')}}">    
+                                <img src=" {{ asset('fichiers/images/site/ban.png') }}" id="ban" alt="Manblio baniere"/> 
+                            </a> 
+                        </td>
+                    </tr>
+                </table>
+                <hr/> 
+            {% endblock %}       
+
+            <div id="site">
+                {% block principale %}
+
+                {% endblock %} 
+            </div>
+
+            {% block pied_de_page %}
+                <hr/>
+                <div id='piedDePage'> <center> Manblio - 07/2015 </center></div>
+            {% endblock %}
+       
+        {% endblock %}
+    </body>
+
+</html>
