@@ -1,4 +1,39 @@
-<div id='cssmenu'>
+         {# -------------- #}
+         <nav class="navbar navbar-inverse navbar-fixed-top">
+           <div class="container">
+             <div class="navbar-header">
+               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                 <span class="sr-only" data-replace-tmp-key="6c7195551da0802a39b5e2bc7187df54">Basculer la navigation</span>
+                 <span class="icon-bar"></span>
+                 <span class="icon-bar"></span>
+                 <span class="icon-bar"></span>
+               </button>
+               <a class="navbar-brand" href="#" data-replace-tmp-key="7adea0d9c77aabccd8bb67ae0a832d59">Nom du projet</a>
+             </div>             
+
+               <form class="navbar-form navbar-right" action="{{ path("fos_user_security_check") }}" method="post">
+                <div class="form-group">
+                   <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                   <input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+                </div>
+                <div class="form-group">
+                   <input class="form-control" type="password" id="password" name="_password" required="required" />
+                </div>
+                <div class="form-group">
+                   <input class="form-control" type="checkbox" id="remember_me" name="_remember_me" value="on" /> 
+                </div>
+                <input class="btn btn-success" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+             </form>
+             <div id="navbar" class="navbar-collapse collapse">
+
+             </div><!--/.navbar-collapse -->
+           </div>
+         </nav>
+
+         {# -------------- #}
+
+
+{# <div id='cssmenu'>
    <ul>
       <li><a href='{{ path('manblio_home_homepage')}}'>Accueil</a></li>
       <li class='has-sub'><a href='#'>Series</a>
@@ -45,4 +80,4 @@
       {% endif %}
       <li><a href='#'>Contact</a></li>
    </ul>
-</div>
+</div> #}

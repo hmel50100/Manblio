@@ -24,8 +24,13 @@ class DefaultController extends Controller
 
     public function getMenuAction()
     {   
+        $csrfToken = $this->container->get('form.csrf_provider')->generateCsrfToken('authenticate');
         // Affiche le menu
-    	return $this->render('ManblioHomeBundle:Default:menu.html.twig', array());
+    	return $this->render('ManblioHomeBundle:Default:menu.html.twig', array(
+            'last_username' => null,
+            'error'         => null,
+            'csrf_token'    => $csrfToken
+            ));
     }
 
     public function searchAction($keyWord){
