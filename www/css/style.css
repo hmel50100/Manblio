@@ -1,9 +1,35 @@
+body{
+	padding-top:60px;
+}
 #ban{
-  height:40px;
-  width:230px;
+	height:20px;
+	width:115px;
 }
 
-.navbar-brand > img{
-margin-top:-8px;
+.navbar-brand {
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
 
+#bandeau{
+	height:250px;
+}
+
+@media (min-width: 768px){
+	#imageBackground{
+		background-image: url('../fichiers/images/site/logo.jpg');
+		background-repeat: no-repeat;
+		background-size: 250px auto;
+	}
+
+}
+@media (min-width: 992px) {
+	#ban{
+		height:40px;
+		width:230px;
+	}
+
+	.navbar-brand {
+		padding: 5px;
+	}
 }
