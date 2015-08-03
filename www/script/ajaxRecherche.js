@@ -3,12 +3,12 @@ $("#loading").hide();
 $("documents").ready(function(){ 
 	$('#resultats_recherche').hide();
 	
-	$(".recherche").keyup(function(){
+	$("#recherche").keyup(function(){
 		if ($(this).val().length >= 3){
 			$('#site').hide();
 				$.ajax({
 	        		type: "POST",
-	        		url: "/find/user/"+ $(".recherche").val(),
+	        		url: "/find/user/"+ $("#recherche").val(),
 	        		beforeSend: function(){
 	        			$("#loading").show();
 	        		},
