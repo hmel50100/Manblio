@@ -14,7 +14,7 @@ class UserRepository extends EntityRepository
 {
 	public function SearchUser($keyWord)
     {
- 
+        $keyWord = str_replace(' ', '%', trim($keyWord));
 		$qb = $this->createQueryBuilder('u')  //add select and array for JSON
             ->where('u.enabled = 1 AND u.id!=1 AND u.username LIKE :string OR u.email LIKE :string')
             ->setParameter('string', '%'.$keyWord.'%')
