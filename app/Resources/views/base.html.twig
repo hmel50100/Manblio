@@ -1,133 +1,145 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>Manblio{% block title %}{% endblock %}</title>
-        {% block stylesheets %}
-            <link href="{{ asset('css/style.css') }}" type="text/css" rel="stylesheet" />
-            <link href="{{ asset('css/menu.css') }}" type="text/css" rel="stylesheet" />
-            
-            <link href="{{ asset('script/JqueryUi/jquery-ui.css') }}" rel="stylesheet"/> 
-            
-            <script src="{{ asset('script/JqueryUi/external/jquery/jquery.js') }}" type="text/javascript"></script>
-            <script src="{{ asset('script/JqueryUi/jquery-ui.js') }}" type="text/javascript"> </script>
-            <script src="{{ asset('script/menuScript.js') }}" type="text/javascript"> </script>
-            <script src="{{ asset('script/ajaxRecherche.js') }}" type="text/javascript"> </script>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+		  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
 
-        {% endblock %}
-        <link rel="icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        <div class="globale">
-        {% block body %}
-            {% block en_tete %}
-                <table class="en_tete">
-                    <tr>
-                        <td>
-                            <a href="{{ path('manblio_home_homepage')}}">
-                                <img src=" {{ asset('fichiers/images/site/logo.jpg') }}" id="logo" alt="Manblio logo"/>
-                            </a>  
-                        </td>
-                         <td id="baniere">
-                            <a href="{{ path('manblio_home_homepage')}}">    
-                                <img src=" {{ asset('fichiers/images/site/ban.png') }}" id="ban" alt="Manblio baniere"/> 
-                            </a> 
-                        </td>
-                        <td id="connexion">
-                            
-                            <div id="userAccordion"> 
-                                <h3> Interface Utilisateur </h3>
-                                <div style="padding:0px !important">
-                                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                                    <p> 
-                                        {% if app.user.profilComplet != 1 %}
-                                            <p><button class="btn" onclick="self.location.href='{{ path('manblioUpdateProfilUser')}}'"> Completer le profil </button>
-                                            </p>
-                                        {% endif %}
-                                            
-                                        {% if app.user.fileName != null %}
-                                            <img class="prof" onclick="self.location.href='{{ path('fos_user_profile_show')}}'"src=" {{ asset('fichiers/images/imageProfil/') }}{{app.user.fileName}}" id="imgProfil" alt="image Profil"/>   
-                                        {% else %}
-                                            <button class="btn" onclick="self.location.href='{{ path('manblioUpdateProfilPicture')}}'"> Ajouter une image de profil </button>
-                                        {% endif %}
-                                     </p>
-                                    <p onclick="self.location.href='{{ path('fos_user_profile_show')}}'" class="prof">
-                                        {{app.user.username}}
-                                         <br/>
-                                        {% if app.user.email|length > 20 %} 
+		<title>Manblio{% block title %}{% endblock %}</title>
+		{% block stylesheets %}
+			<link href="{{ asset('css/menu.css') }}" type="text/css" rel="stylesheet" />
+			<link href="{{ asset('css/bootstrap/bootstrap.min.css') }}" rel="stylesheet">
+			<link href="{{ asset('css/style.css') }}" type="text/css" rel="stylesheet" />
+			<link href="{{ asset('script/JqueryUi/jquery-ui.css') }}" rel="stylesheet"/> 
+			
+			<script src="{{ asset('script/JqueryUi/external/jquery/jquery.js') }}" type="text/javascript"></script>
+			<script src="{{ asset('script/JqueryUi/jquery-ui.js') }}" type="text/javascript"> </script>
+			<script src="{{ asset('script/menuScript.js') }}" type="text/javascript"> </script>
+			<script src="{{ asset('script/ajaxRecherche.js') }}" type="text/javascript"> </script>
+			<script src="{{ asset('script/bootstrap/bootstrap.min.js') }}" type="text/javascript"></script>
+		{% endblock %}
+		<link rel="icon" href="{{ asset('favicon.ico') }}" />
+	</head>
+	<body>
+		<div class="globale">
+		{% block body %}
 
-                                         {{app.user.email[:17]}}...
-                                        {% else %}
-                                            {{app.user.email[:20]}}
-                                        {% endif %}
-                                    </p>
-                                    <p>
-                                    <button class="btn" onclick="self.location.href='{{ path('fos_user_security_logout')}}'">Déconnexion</button>
-                                    </p>
-                                {% else %}
-                                   <p> 
-                                    <button class="btn" onclick="self.location.href='{{ path('fosUserConnexion')}}'">Connexion</button>
 
-                                        <br/>
-                                        <br/>
-                                    <button class="btn" onclick="self.location.href='{{ path('fos_user_registration_register')}}'">Créer un compte</button>
-                                 
-                                    </p>
-                             {% endif %}
-                            </div>
-                            </div>
-                            <br/>
-                            <input type="text" placeholder=" Rechercher ... " class="recherche" id="recherche"/> <span class="ui-icon ui-icon-search"></span>
-                        </td>
-                    </tr>
-                </table>
-                <hr/> 
-            {% endblock %}       
+			{% block en_tete %}
+				<table class="en_tete">
+					<tr>
+						<td>
+							<a href="{{ path('manblio_home_homepage')}}">
+								<img src=" {{ asset('fichiers/images/site/logo.jpg') }}" id="logo" alt="Manblio logo"/>
+							</a>  
+						</td>
+						 <td id="baniere">
+							<a href="{{ path('manblio_home_homepage')}}">    
+								<img src=" {{ asset('fichiers/images/site/ban.png') }}" id="ban" alt="Manblio baniere"/> 
+							</a> 
+						</td>
+						<td id="connexion">
+							
+							<div id="userAccordion"> 
+								<h3> Interface Utilisateur </h3>
+								<div style="padding:0px !important">
+								{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+									<p> 
+										{% if app.user.profilComplet != 1 %}
+											<p><button class="btn" onclick="self.location.href='{{ path('manblioUpdateProfilUser')}}'"> Completer le profil </button>
+											</p>
+										{% endif %}
+											
+										{% if app.user.fileName != null %}
+											<img class="prof" onclick="self.location.href='{{ path('fos_user_profile_show')}}'"src=" {{ asset('fichiers/images/imageProfil/') }}{{app.user.fileName}}" id="imgProfil" alt="image Profil"/>   
+										{% else %}
+											<button class="btn" onclick="self.location.href='{{ path('manblioUpdateProfilPicture')}}'"> Ajouter une image de profil </button>
+										{% endif %}
+									 </p>
+									<p onclick="self.location.href='{{ path('fos_user_profile_show')}}'" class="prof">
+										{{app.user.username}}
+										 <br/>
+										{% if app.user.email|length > 20 %} 
 
-            {% block menu %}    
-                {{render(controller('ManblioHomeBundle:Default:getMenu'))}}
-                <hr/>
-            {% endblock %}
-            <div id="site">
-                {% block principale %}
+										 {{app.user.email[:17]}}...
+										{% else %}
+											{{app.user.email[:20]}}
+										{% endif %}
+									</p>
+									<p>
+									<button class="btn" onclick="self.location.href='{{ path('fos_user_security_logout')}}'">Déconnexion</button>
+									</p>
+								{% else %}
+								   <p> 
+									<button class="btn" onclick="self.location.href='{{ path('fosUserConnexion')}}'">Connexion</button>
 
-                {% endblock %} 
-            </div>
+										<br/>
+										<br/>
+									<button class="btn" onclick="self.location.href='{{ path('fos_user_registration_register')}}'">Créer un compte</button>
+								 
+									</p>
+							 {% endif %}
+							</div>
+							</div>
+							<br/>
+							<input type="text" placeholder=" Rechercher ... " class="recherche" id="recherche"/> <span class="ui-icon ui-icon-search"></span>
+						</td>
+					</tr>
+				</table>
+				<hr/> 
+			{% endblock %}       
 
-        
-                <div id="loading">
-                    <h3> Recherche en cours ... </h3>
-                    <div>
-                        <img src=" {{ asset('fichiers/images/site/loading.gif') }}" />
-                    </div>
-                </div>
+			{% block menu %}    
+				{{render(controller('ManblioHomeBundle:Default:getMenu'))}}
+				<hr/>
+			{% endblock %}
+			<div id="site">
+				{% block principale %}
 
-            <div id="resultats_recherche">
+				{% endblock %} 
+			</div>
 
-            {% if (users is defined) and (livres is defined) %}
-                {% include 'ManblioHomeBundle:Default:resultat.html.twig' with {'users' : users, 'livres': livres}  %}
-                {% endif %}
-            </div>
+		
+				<div id="loading">
+					<h3> Recherche en cours ... </h3>
+					<div>
+						<img src=" {{ asset('fichiers/images/site/loading.gif') }}" />
+					</div>
+				</div>
 
-            {% block pied_de_page %}
-                <hr/>
-                <div id='piedDePage'> <center> Manblio - 07/2015 - <a href="{{ asset('fichiers/documents/CGU_Manblio.pdf') }}" target='_blank'> CGU du site </a></center></div>
-            {% endblock %}
-       
-        {% endblock %}
+			<div id="resultats_recherche">
 
-        {% block javascript %}
-        {% endblock %}
-        <script>
-        $(document).ready(function() {
-            $( "#userAccordion" ).accordion({icons: null, fillSpace: false});
-        }); 
-        
-        $("#loading").accordion({icons:null});
-        $("#loading").hide();
-        $(".prof").css( 'cursor', 'pointer' );
-    </script>
-    </div>
-    </body>
+			{% if (users is defined) and (livres is defined) %}
+				{% include 'ManblioHomeBundle:Default:resultat.html.twig' with {'users' : users, 'livres': livres}  %}
+				{% endif %}
+			</div>
+
+			{% block pied_de_page %}
+				<hr/>
+				<div id='piedDePage'> <center> Manblio - 07/2015 - <a href="{{ asset('fichiers/documents/CGU_Manblio.pdf') }}" target='_blank'> CGU du site </a></center></div>
+			{% endblock %}
+	   
+		{% endblock %}
+
+		{% block javascript %}
+		{% endblock %}
+		<script>
+		$(document).ready(function() {
+			$( "#userAccordion" ).accordion({icons: null, fillSpace: false});
+		}); 
+		
+		$("#loading").accordion({icons:null});
+		$("#loading").hide();
+		$(".prof").css( 'cursor', 'pointer' );
+	</script>
+	</div>
+	</body>
 
 </html>
