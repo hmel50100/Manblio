@@ -32,7 +32,7 @@ body{
 	width:115px;
 }
 #imageBackground{
-	background-color: #4169E1 /*royal blue*/;
+	background-color: #B0C4DE /*LightSteelBlue*/;
 }
 .navbar-brand {
 	padding-top: 15px;
@@ -48,7 +48,7 @@ body{
 
 @media (min-width: 768px){
 	#imageBackground{
-		background-color:#4169E1 /*royal blue*/;
+		background-color:#B0C4DE /*LightSteelBlue*/;
 		background-image: url('../fichiers/images/site/logo.png');
 		background-repeat: no-repeat;
 		background-size: 250px auto;
