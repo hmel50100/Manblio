@@ -44,33 +44,33 @@
 										<div class="row">
 											{% if app.user.profilComplet != 1 and app.user.fileName == null %}
 												<div class="col-sm-6">
-													<button class="btn" onclick="self.location.href='{{ path('manblioUpdateProfilUser')}}'"> Completer le profil </button>
+													<button class="btn btn-warning" onclick="self.location.href='{{ path('manblioUpdateProfilUser')}}'"> Completer le profil </button>
 												</div>
 												<div class="col-sm-6">
-													<button class="btn" onclick="self.location.href='{{ path('manblioUpdateProfilPicture')}}'"> Ajouter un avatar</button>
+													<button class="btn btn-warning" onclick="self.location.href='{{ path('manblioUpdateProfilPicture')}}'"> Ajouter un avatar</button>
 												</div>
 
 												{% elseif app.user.profilComplet != 1 and app.user.fileName != null %}
 												<div class="col-sm-12">
-													<button class="btn" onclick="self.location.href='{{ path('manblioUpdateProfilUser')}}'"> Completer le profil </button>
+													<button class="btn btn-warning" onclick="self.location.href='{{ path('manblioUpdateProfilUser')}}'"> Completer le profil </button>
 												</div>
 
 												{% elseif app.user.profilComplet == 1 and app.user.fileName == null %}
 												<div class="col-sm-12">
-													<button class="btn" onclick="self.location.href='{{ path('manblioUpdateProfilPicture')}}'"> Ajouter un avatar</button>
+													<button class="btn btn-warning" onclick="self.location.href='{{ path('manblioUpdateProfilPicture')}}'"> Ajouter un avatar</button>
 												</div>
 											{% endif %}
 										</div>
 									{% endif %}
 									<div class="row">
-										<div class="col-lg-4">
+										<div class="col-xs-4 col-sm-12 col-lg-4">
 											{% if app.user.fileName != null %}
-                                            	<img class="prof" onclick="self.location.href='{{ path('fos_user_profile_show')}}'"src=" {{ asset('fichiers/images/imageProfil/') }}{{app.user.fileName}}" id="imgProfil" alt="image Profil"/>
-                                        	{% else %}
-                                        		pas encore d'avatar
-                                        	{% endif %}
+												<img class="prof" onclick="self.location.href='{{ path('fos_user_profile_show')}}'"src=" {{ asset('fichiers/images/imageProfil/') }}{{app.user.fileName}}" id="imgProfil" alt="image Profil"/>
+												{% else %}
+												pas encore d'avatar
+											{% endif %}
 										</div>
-										<div class="col-lg-8">
+										<div class="col-xs-8 col-sm-12 col-lg-8">
 											<div class="row">
 												<div class="col-xs-12">
 													<p class="title">{{app.user.username}}</p>
@@ -81,10 +81,10 @@
 													<p class="sub-title">{{app.user.email}}</p>
 												</div>
 											</div>
-										</div>
-										<div class="row">
-											<div class="col-xs-12">
-												<button class="btn" onclick="self.location.href='{{ path('fos_user_security_logout')}}'">Déconnexion</button>
+											<div class="row">
+												<div class="col-xs-12">
+													<button class="btn" onclick="self.location.href='{{ path('fos_user_security_logout')}}'">Déconnexion</button>
+												</div>
 											</div>
 										</div>
 										{% else %}
@@ -99,48 +99,48 @@
 					</div>
 				</div>
 			</div>
+		{% endblock %}
+
+		<div id="site">
+			{% block principale %}
+
 			{% endblock %}
-
-
-			 <div id="site">
-				{% block principale %}
-
-				{% endblock %}
-			</div>
-
-
-				<div id="loading">
+		</div>
+		<div class="container">
+			<div class="row" id="loading">
+				<div class="col-xl-12">
 					<h3> Recherche en cours ... </h3>
 					<div>
 						<img src=" {{ asset('fichiers/images/site/loading.gif') }}" />
 					</div>
 				</div>
-
-			<div id="resultats_recherche">
-
+			</div>
+		</div>
+		<div id="resultats_recherche">
 			{% if (users is defined) and (livres is defined) %}
 				{% include 'ManblioHomeBundle:Default:resultat.html.twig' with {'users' : users, 'livres': livres}  %}
-				{% endif %}
+			{% endif %}
+		</div>
+
+		<footer class="footer">
+			<div class="container-fluid">
+				<p class="text-center">
+					Manblio - 2015 v/dev2.0 - <a href="{{ asset('fichiers/documents/CGU_Manblio.pdf') }}" target='_blank'> CGU du site </a>
+				</p>
 			</div>
-
-			 {% block pied_de_page %}
-				<div id='piedDePage'> <center> Manblio - 07/2015 - <a href="{{ asset('fichiers/documents/CGU_Manblio.pdf') }}" target='_blank'> CGU du site </a></center></div>
-			{% endblock %}
-
+		</footer>
 	{% endblock %}
-
-		{% block javascript %}
-		{% endblock %}
-		<script>
+	{% block javascript %}
+	{% endblock %}
+	<script>
 		$(document).ready(function() {
 			$( "#userAccordion" ).accordion({icons: null, fillSpace: false});
 		});
 
-		$("#loading").accordion({icons:null});
 		$("#loading").hide();
 		$(".prof").css( 'cursor', 'pointer' );
 	</script>
-	</div>
-	</body>
+</div>
+</body>
 
 </html>
