@@ -1,23 +1,55 @@
+#imgProfil{
+  max-height: 125px;
+  max-width: 165px;
+}
+
+.title{
+	font-size:x-large;
+	font-weight: bold;
+	font-style:underline;
+}
+.subTitle{
+	font-size:large;
+}
+
+.row-centered {
+    text-align:center;
+}
+.col-centered {
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    text-align:left;
+    /* inline-block space fix */
+    margin-right:-4px;
+}
+
 body{
-	padding-top:60px;
+	padding-top:50px;
 }
 #ban{
 	height:20px;
 	width:115px;
 }
-
+#imageBackground{
+	background-color: #4169E1 /*royal blue*/;
+}
 .navbar-brand {
 	padding-top: 15px;
 	padding-bottom: 15px;
 }
-
+.btn{
+	margin-top:5px;
+	margin-bottom:5px;
+}
 #bandeau{
 	height:250px;
 }
 
 @media (min-width: 768px){
 	#imageBackground{
-		background-image: url('../fichiers/images/site/logo.jpg');
+		background-color:#4169E1 /*royal blue*/;
+		background-image: url('../fichiers/images/site/logo.png');
 		background-repeat: no-repeat;
 		background-size: 250px auto;
 	}

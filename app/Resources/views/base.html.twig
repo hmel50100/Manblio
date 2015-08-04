@@ -36,47 +36,64 @@
 			<div class="container-fluid" id="imageBackground">
 				<div class="container" id="bandeau">
 					<div class="row">
-						<div class="col-sm-3">
-						</div>
-						<div class="col-sm-4 col-sm-offset-5">
-							<h3> Interface Utilisateur </h3>
-							<div style="padding:0px !important">
+						<div class="col-sm-4 col-sm-offset-8">
+							<div class="row row-centered">
+								<br/>
 								{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-									<p>
-										{% if app.user.profilComplet != 1 %}
-											<p><button class="btn" onclick="self.location.href='{{ path('manblioUpdateProfilUser')}}'"> Completer le profil </button>
-											</p>
-										{% endif %}
+									{% if app.user.profilComplet != 1 and app.user.fileName != null %}
+										<div class="row">
+											{% if app.user.profilComplet != 1 and app.user.fileName == null %}
+												<div class="col-sm-6">
+													<button class="btn" onclick="self.location.href='{{ path('manblioUpdateProfilUser')}}'"> Completer le profil </button>
+												</div>
+												<div class="col-sm-6">
+													<button class="btn" onclick="self.location.href='{{ path('manblioUpdateProfilPicture')}}'"> Ajouter un avatar</button>
+												</div>
 
-										{% if app.user.fileName != null %}
-											{# <img class="prof" onclick="self.location.href='{{ path('fos_user_profile_show')}}'"src=" {{ asset('fichiers/images/imageProfil/') }}{{app.user.fileName}}" id="imgProfil" alt="image Profil"/>
-											{% else %} #}
-											<button class="btn" onclick="self.location.href='{{ path('manblioUpdateProfilPicture')}}'"> Ajouter une image de profil </button>
-										{% endif %}
-									</p>
-									<p onclick="self.location.href='{{ path('fos_user_profile_show')}}'" class="prof">
-										{{app.user.username}}
-										<br/>
-										{% if app.user.email|length > 20 %}
+												{% elseif app.user.profilComplet != 1 and app.user.fileName != null %}
+												<div class="col-sm-12">
+													<button class="btn" onclick="self.location.href='{{ path('manblioUpdateProfilUser')}}'"> Completer le profil </button>
+												</div>
 
-											{{app.user.email[:17]}}...
-											{% else %}
-											{{app.user.email[:20]}}
-										{% endif %}
-									</p>
-									<p>
-										<button class="btn" onclick="self.location.href='{{ path('fos_user_security_logout')}}'">Déconnexion</button>
-									</p>
-									{% else %}
-									<p>
-										<button class="btn" onclick="self.location.href='{{ path('fosUserConnexion')}}'">Connexion</button>
-
-										<br/>
-										<br/>
-										<button class="btn" onclick="self.location.href='{{ path('fos_user_registration_register')}}'">Créer un compte</button>
-
-									</p>
-								{% endif %}
+												{% elseif app.user.profilComplet == 1 and app.user.fileName == null %}
+												<div class="col-sm-12">
+													<button class="btn" onclick="self.location.href='{{ path('manblioUpdateProfilPicture')}}'"> Ajouter un avatar</button>
+												</div>
+											{% endif %}
+										</div>
+									{% endif %}
+									<div class="row">
+										<div class="col-lg-4">
+											{% if app.user.fileName != null %}
+                                            	<img class="prof" onclick="self.location.href='{{ path('fos_user_profile_show')}}'"src=" {{ asset('fichiers/images/imageProfil/') }}{{app.user.fileName}}" id="imgProfil" alt="image Profil"/>
+                                        	{% else %}
+                                        		pas encore d'avatar
+                                        	{% endif %}
+										</div>
+										<div class="col-lg-8">
+											<div class="row">
+												<div class="col-xs-12">
+													<p class="title">{{app.user.username}}</p>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-xs-12">
+													<p class="sub-title">{{app.user.email}}</p>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-xs-12">
+												<button class="btn" onclick="self.location.href='{{ path('fos_user_security_logout')}}'">Déconnexion</button>
+											</div>
+										</div>
+										{% else %}
+										<div class="col-xl-12 col-centered">
+											<button class="btn" onclick="self.location.href='{{ path('fosUserConnexion')}}'">Connexion</button>
+											<button class="btn" onclick="self.location.href='{{ path('fos_user_registration_register')}}'">Créer un compte</button>
+										</div>
+									{% endif %}
+								</div>
 							</div>
 						</div>
 					</div>
@@ -108,12 +125,12 @@
 
 			 {% block pied_de_page %}
 				<div id='piedDePage'> <center> Manblio - 07/2015 - <a href="{{ asset('fichiers/documents/CGU_Manblio.pdf') }}" target='_blank'> CGU du site </a></center></div>
-			{% endblock %} #}
+			{% endblock %}
 
 	{% endblock %}
 
 		{% block javascript %}
-		{% endblock %} #}
+		{% endblock %}
 		<script>
 		$(document).ready(function() {
 			$( "#userAccordion" ).accordion({icons: null, fillSpace: false});
