@@ -2,7 +2,30 @@
   max-height: 125px;
   max-width: 165px;
 }
+.inlineBlock{
+	display:inline-block;
+}
+.cadre{
+	border: 1px solid #EEEEEE;
+	border-radius: 15px;
+	margin-top:5px;
+	margin-bottom:5px;
+	padding:5px;
+}
+.ImgSerie{
+	max-height: 160px;
 
+}
+.division{
+	background-color:#DDDDDD;
+
+}
+.indent{
+	margin-left:10px;
+}
+.center{
+	text-align: center;
+}
 .title{
 	font-size:x-large;
 	font-weight: bold;
@@ -19,7 +42,7 @@
     display:inline-block;
     float:none;
     /* reset the text-align */
-    text-align:left;
+    text-align:center;
     /* inline-block space fix */
     margin-right:-4px;
 }
@@ -32,7 +55,7 @@ body{
 	width:115px;
 }
 #imageBackground{
-	background-color: #B0C4DE /*LightSteelBlue*/;
+	background-color: #6495ED /*LightSteelBlue*/;
 }
 .navbar-brand {
 	padding-top: 15px;
@@ -48,7 +71,7 @@ body{
 
 @media (min-width: 768px){
 	#imageBackground{
-		background-color:#B0C4DE /*LightSteelBlue*/;
+		background-color:#6495ED /*LightSteelBlue*/;
 		background-image: url('../fichiers/images/site/logo.png');
 		background-repeat: no-repeat;
 		background-size: 250px auto;
