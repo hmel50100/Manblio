@@ -13,12 +13,13 @@ if (isset($_SERVER['HTTP_CLIENT_IP'])
     || isset($_SERVER['HTTP_X_FORWARDED_FOR'])
     || !(in_array(@$_SERVER['REMOTE_ADDR'], array(
     	'127.0.0.1',
-        'localhost', 
-    	'fe80::1', 
-    	'::1', 
+        'localhost',
+        '192.168.1.22',
+    	'fe80::1',
+    	'::1',
     	'5.50.49.50',// henri
     	'90.62.157.154'// chez steven
-        
+
    	)) || php_sapi_name() === 'cli-server')
 ) {
     header('HTTP/1.0 403 Forbidden');
