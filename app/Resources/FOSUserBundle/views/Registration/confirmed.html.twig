@@ -3,17 +3,24 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block principale %}
-	<div id="accordion">
-		<h3> Compte créé </h3>
-		<div>
-		    <p>{{ 'registration.confirmed'|trans({'%username%': user.username}) }}</p>
-		    {% if app.session is not empty %}
-		        {% set targetUrl = app.session.get('_security.' ~ app.security.token.providerKey ~ '.target_path') %}
-		        {% if targetUrl is not empty %}<p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>{% endif %}
-		    {% endif %}
+	<div class="row">
+		<div class="col-sm-12">
+			<h3> <span class="glyphicon glyphicon-option-vertical"></span> Compte créé </h3>
+		</div>
+		<div class="col-sm-12">
+			<div class="alert alert-success">
+				{{ 'registration.confirmed'|trans({'%username%': user.username}) }}
+		    		{% if app.session is not empty %}
+
+		        		{% set targetUrl = app.session.get('_security.' ~ app.security.token.providerKey ~ '.target_path') %}
+
+			        	{% if targetUrl is not empty %}
+			        		<a href="{{ targetUrl }}">
+			        			{{ 'registration.back'|trans }}
+			        		</a>
+			        	{% endif %}
+		    		{% endif %}
+			</div>
 		</div>
 	</div>
-	<script>
-		$('#accordion').accordion({icons:null});
-	</script>
 {% endblock %}

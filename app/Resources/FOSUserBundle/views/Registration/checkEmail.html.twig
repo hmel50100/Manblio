@@ -2,14 +2,15 @@
 
 {% trans_default_domain 'FOSUserBundle' %}
 
-{% block principale %}
-    <div id="accordion">
-    	<h3> confirmation par mail </h3>
-    	<div>
-    		<p>{{ 'registration.check_email'|trans({'%email%': user.email}) }}</p>
-    	</div>
-    </div>
-    <script>
-		$('#accordion').accordion({icons:null});
-   	</script>	
-{% endblock %}
+	{% block principale %}
+		<div class="row">
+			<div class="col-sm-12">
+				<h3> <span class="glyphicon glyphicon-option-vertical"></span> Compte créé </h3>
+			</div>
+			<div class="col-sm-12">
+				<div class="alert alert-success">
+					{{ 'registration.check_email'|trans({'%email%': user.email}) }}
+				</div>
+			</div>
+		</div>
+	{% endblock %}

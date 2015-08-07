@@ -1,46 +1,104 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-<div id="principale">
-	<h3> Enregistrement </h3>
-	<div>
+	<div class="cadre">
 		<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
-		    {{ form_widget(form) }}
-
-		    <div> 
-		    	<p> Vous devez lire et accepter les  <a id="link" href="{{ asset('fichiers/documents/CGU_Manblio.pdf') }}" target="_blank"> conditions générale d'utilisation (CGU)</a> afin de crée votre compte  <input type="checkbox" id="actioneur"/></p>
-		    	
-		   </div>
-		    <div>
-		        <input type="submit" value="{{ 'registration.submit'|trans }}" id='hide' class="btn"/>
-		    </div>
+			<div class="row">
+				<div class="col-md-12">
+					<h3> <span class="glyphicon glyphicon-option-vertical"></span> Enregistrement </h3>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					{% if form.email.vars.errors[0].message is defined %}
+            			<div class="alert alert-danger">
+                			{{ form.email.vars.errors[0].message }}
+            			</div>
+        			{% endif %}
+					<div class="input-group">
+						<span class="input-group-addon" id="basic-addon1">@</span>
+						<input id="fos_user_registration_form_email" name="fos_user_registration_form[email]" required="required" type="email" class="form-control" placeholder=" Votre adresse mail" aria-describedby="basic-addon1">
+					</div>
+				</div>
+				<div class="col-sm-6">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					{% if form.username.vars.errors[0].message is defined %}
+	            		<div class="alert alert-danger">
+	                		{{ form.username.vars.errors[0].message }}
+	            		</div>
+	            	{% endif %}
+					<div class="input-group">
+						<span class="input-group-addon" id="basic-addon2"><span class="glyphicon glyphicon-user"></span></span>
+						<input id="fos_user_registration_form_username" name="fos_user_registration_form[username]" required="required" maxlength="255" pattern=".{2,}" type="text" class="form-control" placeholder=" Nom d'utilisateur" aria-describedby="basic-addon2">
+					</div>
+				</div>
+				<div class="col-sm-6">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					{% if form.plainPassword.first.vars.errors[0].message is defined %}
+            			<div class="alert alert-danger">
+                			{{ form.plainPassword.first.vars.errors[0].message }}
+            			</div>
+            		{% endif %}
+					<div class="input-group">
+						<span class="input-group-addon" id="basic-addon3"><span class="glyphicon glyphicon-lock"></span></span>
+						<input id="fos_user_registration_form_plainPassword_first" name="fos_user_registration_form[plainPassword][first]" required="required" type="password" class="form-control" placeholder=" Mot de passe" aria-describedby="basic-addon3">
+					</div>
+				</div>
+				<div class="col-sm-6">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					{% if form.plainPassword.second.vars.errors[0].message is defined %}
+            			<div class="alert alert-danger">
+                			{{ form.plainPassword.second.vars.errors[0].message }}
+            			</div>
+            		{% endif %}
+					<div class="input-group">
+						<span class="input-group-addon" id="basic-addon4"><span class="glyphicon glyphicon-lock"></span></span>
+						<input id="fos_user_registration_form_plainPassword_second" name="fos_user_registration_form[plainPassword][second]" required="required" type="password"class="form-control" placeholder=" Confirmer le mot de passe" aria-describedby="basic-addon4">
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<input id="fos_user_registration_form__token" name="fos_user_registration_form[_token]" value="5upRh_W-9DcikcBzGwL1g_GfZwFt84nZd4f04hDxW18" type="hidden">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="input-group">
+						<span class="input-group-addon">
+							<input type="checkbox"  id="actioneur" aria-label="...">
+						</span>
+						<p type="text" class="form-control-static disabled" aria-label="..."> &nbsp; Veuillez lire et accepter les  <a id="link" href="{{ asset('fichiers/documents/CGU_Manblio.pdf') }}" target="_blank"> conditions générale d'utilisation (CGU)</a> afin de crée votre compte  </p>
+					</div>
+				</div>
+				<div class="col-sm-6">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12 col-sm-offset-3">
+					<input type="submit" class="btn btn-default" id="hide" name="_submit" value="{{ 'registration.submit'|trans }}" />
+				</div>
+			</div>
 		</form>
 	</div>
-</div>
 
-<script> 
-	$("#principale").accordion({icons:null});
 
-	var lien=false;
 
-	$('#link').click(function(){
-		lien=true;
-	});
-
-	$("#actioneur").click(function(){
-		if(lien==true){
+	<script>
+		$("#actioneur").click(function(){
 			if($('#actioneur').is(':checked')){
 				$('#hide').show();
 			}
 			else{
 				$('#hide').hide();
 			}
-		}
-		else{
-			$("#actioneur").prop('checked', false);
-			alert('Vous devez lire les CGU pour cocher la case (click sur le lien si dessus)');
+		})
+		$('#hide').hide();
 
-		}
-	})
-	$('#hide').hide();
-	
-</script>
+	</script>

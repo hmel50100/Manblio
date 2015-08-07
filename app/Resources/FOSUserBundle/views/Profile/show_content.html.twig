@@ -1,68 +1,140 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-<div id="accordion">
-    <h3> Profil de {{user.username}} </h3>
-    <div>
-        <div class="profilInfo">
-            <fieldset>
-                <legend>Profil :</legend>
-                
-                <p> Nom d'utilisateur : {{ user.username }}</p>
-                <p> E-mail : {{ user.email }} </p>
-                <p>
-            		<button class="btn-align" onclick="location.href='{{ path('fos_user_profile_edit')}}'"> Modifier mon profil </button>
-                </p>
-            </fieldset>
-
-            <fieldset>
-                <legend> Mes Informations :</legend>
-                
-            	<p> Date de naissance : {{ user.dateNaissance|date('d/m/Y')}}</p>
-            	<p> Origine : {{user.ville}} ( {{user.departement}} )</p>
-            	<p>
-            		<button class="btn-align" onclick="location.href='{{ path('manblioUpdateProfilUser')}}'"> Modifier mes informations </button>
-                </p>
-            </fieldset>
+    <div class="cadre">
+        <div class="row">
+            <div class="col-md-12">
+                <h3> <span class="glyphicon glyphicon-option-vertical"></span>  Profil de {{user.username}} </h3>
+            </div>
         </div>
-        
-        <div class="profilPicture">
-            <fieldset> 
-                <legend> Mon image de profil :</legend>
-                {% if user.fileName is not null %}
-                    <img class="profilPicture" src="{{ asset('fichiers/images/imageProfil/') }}{{user.fileName}}"/>
-                {% else %}
-                    <img class="profilPicture" src="{{ asset('fichiers/images/site/anonyme.png') }}"/>
-                {% endif %}
-                <br/>
-
-                <p>
-                	<button class="btn-align" onclick="location.href='{{ path('manblioUpdateProfilPicture')}}'"> Modifier mon image de profil </button>
-                </p>
-            </fieldset>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">
+                                    Mon profil
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        Nom d'utilisateur : {{ user.username }}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        E-mail : {{ user.email }}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 center">
+                                        <button class="btn btn-default" onclick="location.href='{{ path('fos_user_profile_edit')}}'"> Modifier mon profil </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">
+                                    Mes informations
+                                </h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                     Date de naissance : {{ user.dateNaissance|date('d/m/Y')}}
+                                    </div>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col-md-12">
+                                        Origine : {{user.ville}} ( {{user.departement}} )
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 center">
+                                        <button class="btn btn-default" onclick="location.href='{{ path('manblioUpdateProfilUser')}}'"> Modifier mes informations </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">
+                                    Mon image de profil
+                                </h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12 center">
+                                     {% if user.fileName is not null %}
+                                         <img class="profilPicture" src="{{ asset('fichiers/images/imageProfil/') }}{{user.fileName}}"/>
+                                         {% else %}
+                                         <img class="profilPicture" src="{{ asset('fichiers/images/site/anonyme.png') }}"/>
+                                     {% endif %}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 center">
+                                    <button class="btn btn-default" onclick="location.href='{{ path('manblioUpdateProfilPicture')}}'"> Modifier mon image de profil </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="autreInfo">
-            <fieldset>
-                <legend>Autre :</legend>
-                    <p> Type de compte :
-                        {% if 'ROLE_ADMIN' in user.roles %}
-                            Administrateur
-                        {% elseif 'ROLE_LECTEUR' in user.roles %}
-                            Lecteur
-                        {% else %}
-                            Utilisateur 
-                        {% endif %}
-                    </p>
-                    <p> Dernière connexion : {{ user.lastLogin|date('d/m/Y')}}</p>
-            
-                    <p><button class="btn-align" onclick="location.href='{{ path('fos_user_change_password')}}'"> Modifier mon mot de passe </button>
-                    </p>
-                    <br/>
-                    <p><button class="btn-align" onclick="location.href='{{ path('manblioDisabledPageAcount')}}'"> Désactiver mon profil </button>
-                    </p>
-            </fieldset>
+        <div class="col-md-3">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                Mes informations
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                 Type de compte :
+                                             {% if 'ROLE_ADMIN' in user.roles %}
+                                                 Administrateur
+                                                 {% elseif 'ROLE_LECTEUR' in user.roles %}
+                                                 Lecteur
+                                                 {% else %}
+                                                 Utilisateur
+                                             {% endif %}
+                                </div>
+                             </div>
+                             <div class="row">
+                                <div class="col-md-12">
+                                     Dernière connexion : {{ user.lastLogin|date('d/m/Y')}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 center">
+                                    <button class="btn btn-default" onclick="location.href='{{ path('fos_user_change_password')}}'"> Modifier mon mot de passe </button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 center">
+                                    <button class="btn btn-default" onclick="location.href='{{ path('manblioDisabledPageAcount')}}'"> Désactiver mon profil </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>       
+    </div>
 </div>
-<script>
-    $( "#accordion" ).accordion({icons: null});
-</script>

@@ -24,6 +24,10 @@
 	background-color:#DDDDDD;
 
 }
+.profilPicture {
+    max-height: 265px;
+    max-width: 350px;
+}
 .indent{
 	margin-left:10px;
 }

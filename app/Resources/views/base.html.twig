@@ -12,7 +12,7 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
-<title>Manblio{% block title %}{% endblock %}</title>
+<title>Manblio - {% block title %}{% endblock %}</title>
 {% block stylesheets %}
 	<link href="{{ asset('css/menu.css') }}" type="text/css" rel="stylesheet" />
 	<link href="{{ asset('css/bootstrap/bootstrap.min.css') }}" rel="stylesheet">
@@ -40,7 +40,7 @@
 							<div class="row row-centered">
 								<br/>
 								{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-									{% if app.user.profilComplet != 1 and app.user.fileName != null %}
+									{% if app.user.profilComplet != 1 or app.user.fileName == null %}
 										<div class="row">
 											{% if app.user.profilComplet != 1 and app.user.fileName == null %}
 												<div class="col-sm-6">
