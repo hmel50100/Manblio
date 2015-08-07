@@ -1,33 +1,64 @@
 {% extends "base.html.twig" %}
 
 {% trans_default_domain 'FOSUserBundle' %}
-
-{% block principale %}
-{% if error %}
-    <div class="error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-{% endif %}
-	<div id="accordion">
-		<h3> Connexion </h3>
-		<div> 
-			<form action="{{ path("fos_user_security_check") }}" method="post">
-			    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-
-			    <label for="username">{{ 'security.login.username'|trans }}</label>
-			    <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
-			    <br/>
-			    <label for="password">{{ 'security.login.password'|trans }}</label>
-			    <input type="password" id="password" name="_password" required="required" />
-<br/>
-			    <input type="checkbox" id="remember_me" name="_remember_me" value="on" /> 
-			    <label for="remember_me">{{ 'security.login.remember_me'|trans }} </label>
-			    <p> ( sauvegarde vos identifiants 1 mois ) </p>
-<br/>
-			    <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
-			    <a href={{path('fos_user_resetting_request')}}> Mot de passe oublié </a>
-			</form>
-		</div>
-	</div>
-	<script>
-		$('#accordion').accordion({icons:null});
-	</script>
-{% endblock %}
+	{% block title %} Connexion {% endblock %}
+		{% block principale %}
+			{% if error %}
+				<div class="row">
+					<div class="col-md-12">
+						<div class="alert alert-danger" role="alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+					</div>
+				</div>
+			{% endif %}
+			<div class="cadre">
+				<form action="{{ path("fos_user_security_check") }}" method="post">
+					<input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+					<div class="row">
+						<div class="col-md-12">
+							<h3> <span class="glyphicon glyphicon-option-vertical"></span> Connexion </h3>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="input-group">
+								<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user"></span></span>
+								<input type="text" class="form-control" id="username" placeholder="Nom d'utilisateur" name="_username" value="{{ last_username }}" required="required" aria-describedby="basic-addon1" />
+							</div>
+						</div>
+						<div class="col-sm-6">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="input-group">
+								<span class="input-group-addon" id="basic-addon2"><span class="glyphicon glyphicon-lock"></span></span>
+								<input type="password" class="form-control" placeholder="Mot de passe" id="password" name="_password" required="required" aria-describedby="basic-addon2" />
+							</div>
+						</div>
+						<div class="col-sm-6">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="input-group">
+		      					<span class="input-group-addon">
+		        					<input type="checkbox"  id="remember_me" name="_remember_me" value="on"aria-label="...">
+		     					</span>
+		     					<p type="text" class="form-control-static disabled" aria-label="..."> &nbsp; Enregistré mes identifiants 1 mois </p>
+							</div>
+						</div>
+						<div class="col-sm-6">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-9 col-sm-offset-3">
+							<input type="submit" class="btn btn-default" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+							<a href={{path('fos_user_resetting_request')}}>
+								<span class="btn btn-default">
+								 	Mot de passe oublié
+								</span>
+							</a>
+						</div>
+					</div>
+				</form>
+		{% endblock %}
