@@ -65,7 +65,7 @@
 									<div class="row">
 										<div class="col-xs-4 col-sm-12 col-lg-4">
 											{% if app.user.fileName != null %}
-												<img class="prof" onclick="self.location.href='{{ path('fos_user_profile_show')}}'"src=" {{ asset('fichiers/images/imageProfil/') }}{{app.user.fileName}}" id="imgProfil" alt="image Profil"/>
+												<img class="prof" onclick="self.location.href='{{ path('fos_user_profile_show')}}'" src=" {{ asset('fichiers/images/imageProfil/') }}{{app.user.fileName}}" id="imgProfil" alt="image Profil"/>
 												{% else %}
 												pas encore d'avatar
 											{% endif %}
@@ -140,7 +140,6 @@
 		$("#loading").hide();
 		$(".prof").css( 'cursor', 'pointer' );
 	</script>
-</div>
 </body>
 
 </html>
