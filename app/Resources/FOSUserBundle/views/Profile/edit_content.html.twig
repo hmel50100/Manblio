@@ -1,17 +1,66 @@
 {% trans_default_domain 'FOSUserBundle' %}
-
-<div id="accordion">
-	<h3> Modifier mon profil </h3>
-	<div>
+	<div class="cadre">
+		<div class="row">
+			<div class="col-md-12">
+				<h3> <span class="glyphicon glyphicon-option-vertical"></span> Modifier mon profil </h3>
+			</div>
+		</div>
 		<form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
-		    {{ form_widget(form) }}
-		    <div>
-		        <input type="submit" value="{{ 'profile.edit.submit'|trans }}" class="btn"/>
-		    </div>
+			{{ form_widget(form._token) }}
+			<div class="row">
+				<div class="col-sm-6">
+					{% if form.username.vars.errors[0].message is defined %}
+						<div class="alert alert-danger">
+							{{ form.username.vars.errors[0].message }}
+						</div>
+					{% endif %}
+					<div class="input-group">
+						<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-user"></span></span>
+						<input id="fos_user_profile_form_username" name="fos_user_profile_form[username]" required="required" maxlength="255" pattern=".{2,}" value="{{app.user.username}}" type="text"  class="form-control" placeholder="Nouveau nom d'utilisateur" aria-describedby="basic-addon1">
+					</div>
+				</div>
+				<div class="col-sm-6">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					{% if form.email.vars.errors[0].message is defined %}
+						<div class="alert alert-danger">
+							{{ form.email.vars.errors[0].message }}
+						</div>
+					{% endif %}
+					<div class="input-group">
+						<span class="input-group-addon" id="basic-addon2">@</span>
+						<input id="fos_user_profile_form_email" name="fos_user_profile_form[email]" required="required" type="email" class="form-control" value="{{app.user.email}}" placeholder=" Votre adresse mail" aria-describedby="basic-addon2">
+					</div>
+				</div>
+				<div class="col-sm-6">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					{% if form.current_password.vars.errors[0].message is defined %}
+						<div class="alert alert-danger">
+							{{ form.current_password.vars.errors[0].message }}
+						</div>
+					{% endif %}
+					<div class="input-group">
+						<span class="input-group-addon" id="basic-addon3"><span class="glyphicon glyphicon-lock"></span></span>
+						<input id="fos_user_profile_form_current_password" name="fos_user_profile_form[current_password]" required="required" type="password" class="form-control" placeholder=" Votre mot de passe" aria-describedby="basic-addon3">
+					</div>
+				</div>
+				<div class="col-sm-6">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6 center">
+					<div class="input-group">
+						<input type="submit" value="{{ 'profile.edit.submit'|trans }}" class="btn btn-default"/>
+					</div>
+				</div>
+				<div class="col-sm-6">
+				</div>
+			</div>
+
 		</form>
 	</div>
-</div>
-
-<script>
-	$("#accordion").accordion({icons:null});
-</script>

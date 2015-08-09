@@ -1,15 +1,20 @@
 {% extends "base.html.twig" %}
-
+{% block title %} Verifier email {% endblock %}
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block principale %}
-<div id="accordion">
-	<h3> Mail de confirmation </h3>
-	<div>
-		{{ 'resetting.check_email'|trans({'%email%': email}) }}
+<div id="cadre">
+	<div class="row">
+		<div class="col-sm-12">
+			<h3><span class="glyphicon glyphicon-option-vertical"></span> Mail de confirmation </h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="alert alert-success">
+				{{ 'resetting.check_email'|trans({'%email%': email}) }}
+			</div>
+		</div>
 	</div>
 </div>
-<script>
-	$('#accordion').accordion({icons:null});
-</script>
 {% endblock %}

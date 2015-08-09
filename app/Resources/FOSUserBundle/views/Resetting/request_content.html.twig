@@ -1,23 +1,33 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-<div id="accordion">
-    <h3> Mot de passe oublier </h3>
-    <div>
-        <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
-            <div>
+<div class="cadre">
+    <div class="row">
+        <div class="col-sm-12">
+            <h3><span class="glyphicon glyphicon-option-vertical"></span> Mot de passe oublié </h3>
+        </div>
+    </div>
+    <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
+        <div class="row">
+            <div class="col-sm-6">
                 {% if invalid_username is defined %}
-                    <p>{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}) }}</p>
+                        <div class="alert alert-danger">
+                            {{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}) }}
+                        </div>
                 {% endif %}
-                <label for="username">{{ 'resetting.request.username'|trans }}</label>
-                <input type="text" id="username" name="username" required="required" />
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon3"><span class="glyphicon glyphicon-user"></span> / @</span>
+                    <input  type="text" id="username" name="username" required="required" class="form-control" placeholder=" Nom d'utilisateur ou adresse mail" aria-describedby="basic-addon3">
+                </div>
             </div>
-            <div>
+            <div class="col-sm-6">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 center">
                 <input type="submit" value="{{ 'resetting.request.submit'|trans }}" class="btn"/>
             </div>
-        </form>
-    </div>
+            <div class="col-sm-6">
+            </div>
+        </div>
+    </form>
 </div>
-
-<script> 
-    $('#accordion').accordion({icons:null});
-</script>
